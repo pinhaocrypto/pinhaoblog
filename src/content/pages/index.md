@@ -6,7 +6,7 @@ description: A stunning Astro theme designed for captivating image-centric websi
 heading: 測試
 ---
 <p align="center">
-  <img src="public/img/hangang.png" width="100%" alt="Light Mode" style="border-radius: 10px; border: 1px solid #ddd;">
+  <img src="/img/hangang.png" width="100%" alt="Light Mode" style="border-radius: 10px; border: 1px solid #ddd;">
 </p>
 
 Seoul Hangang
