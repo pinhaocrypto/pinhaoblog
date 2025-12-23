@@ -46,3 +46,10 @@
 
     /* Old BG--color-bg: #f8f8f8;*/
 }
+
+:lang(zh),
+:lang(zh-TW),
+:lang(zh-HK),
+:lang(zh-Hant) {
+	font-family: 'Source Han Sans TC', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Heiti TC', sans-serif;
+}
