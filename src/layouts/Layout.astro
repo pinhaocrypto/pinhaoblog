@@ -6,6 +6,8 @@ import '../styles/content.css'; /* Importing remaining global content styles */
 
 import { ClientRouter } from 'astro:transitions';
 
+const SITE_TITLE = 'MNIPH';
+
 // Migrating logic from src/components/layout.js
 export interface Props {
 	title?: string;
@@ -14,6 +16,7 @@ export interface Props {
 }
 
 const { title, description } = Astro.props;
+const documentTitle = title && title !== SITE_TITLE ? `${title} | ${SITE_TITLE}` : SITE_TITLE;
 
 ---
 
@@ -25,7 +28,7 @@ const { title, description } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title || "Clay"}</title>
+		<title>{documentTitle}</title>
         <ClientRouter />
         <script is:inline>
             // Theme init
@@ -71,11 +74,11 @@ const { title, description } = Astro.props;
 						</li>
 					</ul>
 				</nav>
-                <div class="site-head-center">
-                    <a class="site-head-logo" href="/">
-                        {title || "Clay"}
-                    </a>
-                </div>
+	                <div class="site-head-center">
+	                    <a class="site-head-logo" href="/">
+	                        {SITE_TITLE}
+	                    </a>
+	                </div>
                 <div class="site-head-right">
                     <div class="social-links">
                         <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">

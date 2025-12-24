@@ -6,14 +6,16 @@ const allPages = await getCollection('pages');
 const indexPage = allPages.find((p) => p.slug === 'index');
 const { Content } = indexPage ? await indexPage.render() : { Content: null };
 
-const title = indexPage?.data.title || 'My Name Is PIN HAO';
+const heroTitle = indexPage?.data.title || 'My Name Is PIN HAO';
+const browserTitle = 'MNIPH';
 const description = indexPage?.data.description;
-const heading = indexPage?.data.heading || 'Welcome';
-// const subheading = indexPage?.data.subheading ?? indexPage?.data.description;
+const heading = indexPage?.data.heading || '';
 ---
 
-<Layout title={title} description={description}>
+<Layout title={browserTitle} description={description}>
 	<section class="home-hero">
+		{heroTitle && <p class="home-hero__label">{heroTitle}</p>}
+		{heading && <h1 class="home-hero__heading">{heading}</h1>}
 		{Content && (
 			<article class="home-hero__body post-content no-image">
 				<Content />
@@ -26,33 +28,25 @@ const heading = indexPage?.data.heading || 'Welcome';
 	.home-hero {
 		max-width: 860px;
 		margin: 0 auto;
-		padding: 1.5rem 1.5rem;
+		padding: 1.5rem;
 		text-align: center;
 	}
 
-	/* .home-hero__label {
+	.home-hero__label {
 		font-variant: small-caps;
 		letter-spacing: 0.2em;
-		margin: 0 0 1rem;
+		margin: 0 0 0.5rem;
 		color: var(--color-border);
-	} */
+	}
 
 	.home-hero__heading {
 		font-size: clamp(2.5rem, 6vw, 4.5rem);
 		margin: 0;
 		font-family: var(--font-sans-serif);
-		text-transform: lowercase;
 	}
 
-	/* .home-hero__subheading {
-		font-size: 1.25rem;
-		margin: 1rem auto 0;
-		max-width: 40ch;
-		color: var(--color-base);
-	} */
-
 	.home-hero__body {
-		margin-top: 2.5rem;
+		margin-top: 2rem;
 	}
 
 	.home-hero__body :global(h2) {
