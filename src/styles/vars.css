@@ -13,6 +13,12 @@
     --color-base: #131313;
     --color-border: #ddd;
     --color-bg: #ffffff;
+    --color-text-subtle: #5a5a5a;
+    --color-surface: #f5f5f5;
+    --color-surface-border: #080808;
+    --color-code-text: #080808;
+    --color-code-bg: #eeeeee;
+    --color-primary-contrast: #2a7fb8;
 
     /* Fonts */
     --font-sans-serif: 'Futura', 'League Spartan', 'Trebuchet MS', Arial, sans-serif;
@@ -42,6 +48,12 @@
     --color-base: #e0e0e0;
     --color-border: #444;
     --color-bg: #121212;
+    --color-text-subtle: #b5b5b5;
+    --color-surface: #1f1f1f;
+    --color-surface-border: #5a5a5a;
+    --color-code-text: #f5f5f5;
+    --color-code-bg: #1e1e1e;
+    --color-primary-contrast: #8fd8ff;
 
 
     /* Old BG--color-bg: #f8f8f8;*/

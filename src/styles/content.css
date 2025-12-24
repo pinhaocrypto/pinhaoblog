@@ -55,7 +55,7 @@ production stylesheet in assets/built/screen.css using gulp dev
   font-size: 1.4rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: color(var(--color-base) l(+50%));
+  color: var(--color-text-subtle);
 }
 
 .error-link {
@@ -77,7 +77,7 @@ production stylesheet in assets/built/screen.css using gulp dev
 
 .page-head-description {
   margin: 0 0 1.6vw;
-  color: color(var(--color-border) l(-20%));
+  color: var(--color-text-subtle);
   font-size: 2.2rem;
   line-height: 1.35em;
 }
@@ -178,6 +178,24 @@ production stylesheet in assets/built/screen.css using gulp dev
   color: var(--color-base);
 }
 
+html[data-theme='dark'] .post-content-body h1,
+html[data-theme='dark'] .post-content-body h2,
+html[data-theme='dark'] .post-content-body h3,
+html[data-theme='dark'] .post-content-body h4,
+html[data-theme='dark'] .post-content-body h5,
+html[data-theme='dark'] .post-content-body h6 {
+  color: var(--color-base) !important;
+}
+
+html[data-theme='dark'] .post-content-body h1 a,
+html[data-theme='dark'] .post-content-body h2 a,
+html[data-theme='dark'] .post-content-body h3 a,
+html[data-theme='dark'] .post-content-body h4 a,
+html[data-theme='dark'] .post-content-body h5 a,
+html[data-theme='dark'] .post-content-body h6 a {
+  color: inherit !important;
+}
+
 .post-content-body li {
   word-break: break-word;
 }
@@ -193,7 +211,7 @@ production stylesheet in assets/built/screen.css using gulp dev
 .post-content-body blockquote {
   margin: 0 0 1.5em;
   padding: 0 1.5em;
-  border-left: #000 3px solid;
+  border-left: var(--color-surface-border) 3px solid;
 }
 
 .post-content-body blockquote p {
@@ -226,11 +244,11 @@ production stylesheet in assets/built/screen.css using gulp dev
   margin: 1.5em 0 3em;
   padding: 20px;
   max-width: 100%;
-  border: color(var(--color-base) l(-10%)) 1px solid;
-  color: #080808;
+  border: var(--color-surface-border) 1px solid;
+  color: var(--color-code-text);
   font-size: 1.4rem;
   line-height: 1.5em;
-  background: #eeeeee;
+  background: var(--color-code-bg);
   border-radius: 5px;
 }
 
@@ -262,8 +280,8 @@ production stylesheet in assets/built/screen.css using gulp dev
   margin-left: -10px;
   width: 0px;
   height: 30px;
-  background: color(var(--color-border) l(+10%));
-  box-shadow: #000 0 0 0 1px;
+  background: var(--color-surface);
+  box-shadow: 0 0 0 1px var(--color-surface-border);
   transform: rotate(45deg);
 }
 
@@ -295,7 +313,7 @@ production stylesheet in assets/built/screen.css using gulp dev
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
-  color: color(var(--color-border) l(-20%));
+  color: var(--color-text-subtle);
 }
 
 .author-links {

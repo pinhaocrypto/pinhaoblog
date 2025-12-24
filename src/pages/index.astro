@@ -10,16 +10,42 @@ const heroTitle = indexPage?.data.title || 'My Name Is PIN HAO';
 const browserTitle = 'MNIPH';
 const description = indexPage?.data.description;
 const heading = indexPage?.data.heading || '';
+const heroImageLight = indexPage?.data.heroImageLight ?? indexPage?.data.image;
+const heroImageDark = indexPage?.data.heroImageDark ?? null;
+const heroImageAlt = indexPage?.data.heroImageAlt || heroTitle;
+const hasHeroImage = heroImageLight || heroImageDark;
 ---
 
 <Layout title={browserTitle} description={description}>
 	<section class="home-hero">
 		{heroTitle && <p class="home-hero__label">{heroTitle}</p>}
 		{heading && <h1 class="home-hero__heading">{heading}</h1>}
-		{Content && (
-			<article class="home-hero__body post-content no-image">
-				<Content />
-			</article>
+	{hasHeroImage && (
+		<figure class="home-hero__image">
+			{heroImageLight && (
+				<img
+					src={heroImageLight}
+					alt={heroImageAlt}
+					class="home-hero__img home-hero__img--light"
+					loading="eager"
+					decoding="async"
+				/>
+			)}
+			{heroImageDark && (
+				<img
+					src={heroImageDark}
+					alt={heroImageAlt}
+					class="home-hero__img home-hero__img--dark"
+					loading="eager"
+					decoding="async"
+				/>
+			)}
+		</figure>
+	)}
+	{Content && (
+		<article class="home-hero__body post-content no-image">
+			<Content />
+		</article>
 		)}
 	</section>
 </Layout>
@@ -51,5 +77,38 @@ const heading = indexPage?.data.heading || '';
 
 	.home-hero__body :global(h2) {
 		font-size: clamp(2rem, 4vw, 3rem);
+	}
+
+	.home-hero__image {
+		margin-top: 2rem;
+	}
+
+	.home-hero__img {
+		display: block;
+		width: 100%;
+		border-radius: 10px;
+		border: 1px solid var(--color-border);
+	}
+
+	.home-hero__img + .home-hero__img {
+		margin-top: 1rem;
+	}
+	</style>
+
+<style is:global>
+	html:not([data-theme='dark']) .home-hero__img--light {
+		display: block;
+	}
+
+	html:not([data-theme='dark']) .home-hero__img--dark {
+		display: none;
+	}
+
+	html[data-theme='dark'] .home-hero__img--light {
+		display: none;
+	}
+
+	html[data-theme='dark'] .home-hero__img--dark {
+		display: block;
 	}
 </style>

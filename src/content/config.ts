@@ -9,6 +9,9 @@ const commonSchema = z.object({
   // Add other fields as discovered
   image: z.string().optional(),
   featuredimage: z.string().optional(),
+  heroImageLight: z.string().optional(),
+  heroImageDark: z.string().optional(),
+  heroImageAlt: z.string().optional(),
   heading: z.string().optional(),
   subheading: z.string().optional(),
   number: z.number().optional(),

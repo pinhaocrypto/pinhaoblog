@@ -1,15 +1,15 @@
 ---
 templateKey: bio-page
-thumbnail: /img/clay-image-1.jpg
+# thumbnail: /img/clay-image-1.jpg
 date: 2023-03-02T10:17:05.133Z
 title: Bio
 description: About the Artist
 number: 1
 pagetype:
   - main
-featuredimage: /img/clay-image-1.jpg
+# featuredimage: /img/clay-image-1.jpg
 ---
-![Artist at work](/img/clay-images-11.jpg)
+![Artist at work](/img/pinhao.jpg)
 
 ## The Hands Behind the Clay
 

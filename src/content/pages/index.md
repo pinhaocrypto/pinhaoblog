@@ -3,10 +3,10 @@ templateKey: index-page
 title: My Name Is PIN HAO
 image: /img/clay-images-7.jpg
 description: A stunning Astro theme designed for captivating image-centric websites, perfect for photographers, portfolios, and blogs.
+heroImageLight: /img/hangang_morning.png
+heroImageDark: /img/hangang_night.png
+heroImageAlt: Seoul Hangang skyline
 ---
-<p align="center">
-  <img src="/img/hangang.jpeg" width="100%" alt="Light Mode" style="border-radius: 10px; border: 1px solid #ddd;">
-</p>
 
 Seoul Hangang
 

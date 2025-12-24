@@ -200,6 +200,15 @@ const documentTitle = title && title !== SITE_TITLE ? `${title} | ${SITE_TITLE}`
     .theme-toggle:hover {
         opacity: 1;
     }
+
+    html[data-theme='dark'] h1,
+    html[data-theme='dark'] h2,
+    html[data-theme='dark'] h3,
+    html[data-theme='dark'] h4,
+    html[data-theme='dark'] h5,
+    html[data-theme='dark'] h6 {
+        color: var(--color-base);
+    }
     .sun-icon {
         color: #FFD700; /* Yellow */
     }
