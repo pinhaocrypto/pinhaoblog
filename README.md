@@ -92,7 +92,7 @@ The output will be in the `dist/` directory, ready for deployment.
 ├── src/
 │   ├── components/         # Reusable Astro components (PostCard, etc.)
 │   ├── content/            # Content Collections (Markdown/MDX)
-│   │   ├── news/           # News/blog posts
+│   │   ├── blog/           # Blog posts
 │   │   ├── pages/          # Static pages
 │   │   ├── sold/           # Sold items (for artists)
 │   │   └── work/           # Portfolio work items

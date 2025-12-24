@@ -18,7 +18,7 @@ const commonSchema = z.object({
   pagetype: z.array(z.string()).optional(),
 }).partial();
 
-const news = defineCollection({
+const blog = defineCollection({
   type: 'content',
   schema: commonSchema,
 });
@@ -39,7 +39,7 @@ const pages = defineCollection({
 });
 
 export const collections = {
-  news,
+  blog,
   work,
   sold,
   pages,

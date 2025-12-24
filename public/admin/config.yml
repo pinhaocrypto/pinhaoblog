@@ -14,8 +14,8 @@ public_folder: /img
 
 collections:
   - name: "blog"
-    label: "News"
-    folder: "src/content/news"
+    label: "Blog"
+    folder: "src/content/blog"
     create: true
     slug: "{{slug}}"
     fields:
@@ -225,9 +225,9 @@ collections:
               options: [{ label: "Main", value: "main" }],
             }
 
-      - file: "src/content/pages/news.md"
-        label: "News"
-        name: "news"
+      - file: "src/content/pages/blog.md"
+        label: "Blog"
+        name: "blog"
         fields:
           - {
               label: "Template Key",

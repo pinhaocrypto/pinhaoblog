@@ -11,11 +11,10 @@ pagetype:
 ---
 ![Artist at work](/img/pinhao.jpg)
 
-## The Hands Behind the Clay
+## About Me
 
-I am a ceramic artist based in the Pacific Northwest, where the rugged coastline and dense forests inspire my work. My journey with clay began over a decade ago, first as a meditative practice and later as a lifelong obsession with form and fire.
-
-I work primarily with stoneware and porcelain, utilizing both wheel-throwing and hand-building techniques. My philosophy is rooted in wabi-sabi—finding beauty in the imperfect, the impermanent, and the incomplete.
+I’m PinHao, currently working at Academia Sinica, with a research focus on post-quantum cryptography.
+I’m also interested in Ethereum and building cryptographic systems that are more efficient in practice. 
 
 ![Studio shelves](/img/clay-images-12.jpg)
 

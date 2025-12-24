@@ -9,13 +9,13 @@ export async function getStaticPaths() {
   const pages = await getCollection('pages');
 
   // Pre-fetch other collections for index pages
-  const newsEntries = await getCollection('news');
+  const blogEntries = await getCollection('blog');
   const workEntries = await getCollection('work');
   const soldEntries = await getCollection('sold');
 
   // Sort them
   const sortDate = (a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime();
-  const sortedNews = newsEntries.sort(sortDate);
+  const sortedBlog = blogEntries.sort(sortDate);
   const sortedWork = workEntries.sort(sortDate);
   const sortedSold = soldEntries.sort(sortDate);
 
@@ -26,8 +26,8 @@ export async function getStaticPaths() {
     let baseSlug = '';
 
     if (entry.data.templateKey === 'news-page') {
-        items = sortedNews;
-        baseSlug = 'news';
+        items = sortedBlog;
+        baseSlug = 'blog';
     } else if (entry.data.templateKey === 'work-page') {
         items = sortedWork;
         baseSlug = 'work';
