@@ -183,10 +183,23 @@ html[data-theme='dark'] .post-content-body h6 a {
 
 .post-content-body li {
   word-break: break-word;
+  font-size: 1.1em;
+  line-height: 1.7em;
 }
 
 .post-content-body li p {
   margin: 0;
+}
+
+.post-content-body a {
+  color: var(--color-base);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.post-content-body a:hover {
+  border-color: currentColor;
 }
 
 .post-content-body iframe {
@@ -352,3 +365,12 @@ html[data-theme='dark'] .post-content-body h6 a {
 img.gatsby-resp-image-image { border-radius: 10px !important;}
 
 img {border-radius: 10px;}
+.post-content-body a {
+  color: var(--color-base);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.post-content-body a:hover {
+  color: var(--color-primary);
+}

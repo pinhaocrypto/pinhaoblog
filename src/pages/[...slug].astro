@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Page from '../templates/Page.astro';
 import List from '../templates/List.astro';
+import BlogList from '../templates/BlogList.astro';
 // import Elements from '../templates/Elements.astro';
 
 export async function getStaticPaths() {
@@ -48,7 +49,9 @@ const { entry, items, baseSlug } = Astro.props;
 const templateKey = entry.data.templateKey;
 ---
 
-{templateKey === 'news-page' || templateKey === 'exhibitions-page' ? (
+{templateKey === 'news-page' ? (
+    <BlogList entry={entry} items={items} baseSlug={baseSlug} />
+) : templateKey === 'exhibitions-page' ? (
     <List entry={entry} items={items} baseSlug={baseSlug} />
 ) : (
     <Page entry={entry} />
