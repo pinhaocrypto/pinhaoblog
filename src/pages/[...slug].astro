@@ -9,13 +9,11 @@ export async function getStaticPaths() {
 
   // Pre-fetch other collections for index pages
   const blogEntries = await getCollection('blog');
-  const workEntries = await getCollection('work');
   const soldEntries = await getCollection('sold');
 
   // Sort them
   const sortDate = (a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime();
   const sortedBlog = blogEntries.sort(sortDate);
-  const sortedWork = workEntries.sort(sortDate);
   const sortedSold = soldEntries.sort(sortDate);
 
   return pages.map(entry => {
@@ -27,9 +25,6 @@ export async function getStaticPaths() {
     if (entry.data.templateKey === 'news-page') {
         items = sortedBlog;
         baseSlug = 'blog';
-    } else if (entry.data.templateKey === 'work-page') {
-        items = sortedWork;
-        baseSlug = 'work';
     } else if (entry.data.templateKey === 'exhibitions-page') { // maps to sold collection
         items = sortedSold;
         baseSlug = 'sold';
@@ -53,7 +48,7 @@ const { entry, items, baseSlug } = Astro.props;
 const templateKey = entry.data.templateKey;
 ---
 
-{templateKey === 'news-page' || templateKey === 'work-page' || templateKey === 'exhibitions-page' ? (
+{templateKey === 'news-page' || templateKey === 'exhibitions-page' ? (
     <List entry={entry} items={items} baseSlug={baseSlug} />
 ) : (
     <Page entry={entry} />

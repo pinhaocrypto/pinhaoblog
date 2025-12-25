@@ -3,10 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import { type CollectionEntry } from 'astro:content';
 
 interface Props {
-  entry: CollectionEntry<'work'> | CollectionEntry<'blog'> | CollectionEntry<'sold'>;
+  entry: CollectionEntry<'blog'> | CollectionEntry<'sold'>;
   next?: any;
   prev?: any;
-  baseSlug?: string; // e.g. 'work'
+  baseSlug?: string; // e.g. 'blog'
 }
 
 const { entry, next, prev, baseSlug } = Astro.props;

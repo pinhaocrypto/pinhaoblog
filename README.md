@@ -93,14 +93,13 @@ The output will be in the `dist/` directory, ready for deployment.
 │   ├── components/         # Reusable Astro components (PostCard, etc.)
 │   ├── content/            # Content Collections (Markdown/MDX)
 │   │   ├── blog/           # Blog posts
-│   │   ├── pages/          # Static pages
-│   │   ├── sold/           # Sold items (for artists)
-│   │   └── work/           # Portfolio work items
+│   │   ├── pages/          # Static pages (Home, Bio, Work…)
+│   │   └── sold/           # Sold items (for artists)
 │   ├── layouts/            # Main layouts (Layout.astro)
 │   ├── pages/              # Route definitions
 │   │   ├── index.astro     # Home page
 │   │   ├── [...slug].astro # Dynamic route for generic pages
-│   │   └── work/[slug].astro # Dynamic routes for collections
+│   │   └── blog/[slug].astro # Dynamic routes for blog posts
 │   ├── styles/             # Global variables and resets
 │   │   ├── content.css     # Typography for markdown content
 │   │   └── vars.css        # CSS Variables (Colors, Fonts)
