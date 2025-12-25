@@ -9,13 +9,14 @@ pagetype:
   - main
 # featuredimage: /img/clay-image-1.jpg
 ---
-![Artist at work](/img/pinhao.jpg)
+<!-- ![Artist at work](/img/pinhao.jpg) -->
+<p align="center">
+  <img src="/img/pinhao.jpg" alt="Artist at work" width="360" />
+</p>
 
 ## About Me
-
 I’m PinHao, currently working at Academia Sinica, with a research focus on post-quantum cryptography.
 I’m also interested in Ethereum and building cryptographic systems that are more efficient in practice. 
-
 
 ### Music
 #### BTS
