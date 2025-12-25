@@ -10,4 +10,3 @@ number: 2
 featuredimage: /img/clay-images-15.jpg
 ---
 
-

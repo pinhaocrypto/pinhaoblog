@@ -12,33 +12,54 @@ interface Props {
 const { entry, items = [], baseSlug } = Astro.props;
 const { Content } = await entry.render();
 
-const { title, description, thumbnail } = entry.data;
+const { title, description, thumbnail, featuredimage } = entry.data;
+const heroImage = featuredimage ?? thumbnail;
 
 let postCounter = 0;
 ---
 
 <Layout title={title} description={description}>
-    {description && (
+  {
+    heroImage && (
+      <div class="post-content-image">
+        <img src={heroImage} class="kg-image" alt={title} />
+      </div>
+    )
+  }
+  {
+    description && (
       <header class="page-head">
-        <h2 class="page-head-title">
-          {description}
-        </h2>
+        <h2 class="page-head-title">{description}</h2>
       </header>
-    )}
+    )
+  }
 
-    {/* Content from the index markdown (if any, though legacy work-page didn't show it, only description).
-        But generic List might want it. */}
+  {
+    /* Content from the index markdown (if any, though legacy work-page didn't show it, only description).
+        But generic List might want it. */
+  }
+  {
+    Content && (
+      <article class="post-content no-image">
+        <div class="post-content-body">
+          <Content />
+        </div>
+      </article>
+    )
+  }
 
-    <div class="post-feed">
-        {items.map((post) => {
-            postCounter++;
-            return (
-                <PostCard
-                    count={postCounter}
-                    post={post}
-                    slug={baseSlug ? `${baseSlug}/${post.slug}` : post.slug}
-                />
-            );
-        })}
-    </div>
+  <div class="post-feed">
+    {
+      items.map((post) => {
+        postCounter++;
+        return (
+          <PostCard
+            count={postCounter}
+            post={post}
+            slug={baseSlug ? `${baseSlug}/${post.slug}` : post.slug}
+          />
+        );
+      })
+    }
+  </div>
 </Layout>

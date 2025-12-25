@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Page from '../templates/Page.astro';
-import Contact from '../templates/Contact.astro';
 import List from '../templates/List.astro';
 // import Elements from '../templates/Elements.astro';
 
@@ -54,9 +53,7 @@ const { entry, items, baseSlug } = Astro.props;
 const templateKey = entry.data.templateKey;
 ---
 
-{templateKey === 'contact-page' ? (
-    <Contact entry={entry} />
-) : templateKey === 'news-page' || templateKey === 'work-page' || templateKey === 'exhibitions-page' ? (
+{templateKey === 'news-page' || templateKey === 'work-page' || templateKey === 'exhibitions-page' ? (
     <List entry={entry} items={items} baseSlug={baseSlug} />
 ) : (
     <Page entry={entry} />

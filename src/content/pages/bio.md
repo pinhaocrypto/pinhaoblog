@@ -24,4 +24,5 @@ Every piece is crafted in my home studio. I formulate my own glazes using locall
 
 When I am not in the studio, you can find me hiking the trails of the Cascades or scouring the beach for interesting stones and driftwood.
 
-<a href="https://unsplash.com/@tomcrewceramics" target="_blank">Image credits - Tom Crew</a>
+
+
