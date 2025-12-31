@@ -8,11 +8,11 @@ heroImageDark: /img/hangang_night.png
 heroImageAlt: Seoul Hangang skyline
 ---
 
-Seoul Hangang
+## Recent Thoughts - 2025.12.31 Updated
 
-## 近況更新（Rencently Update）
+想說主頁應該要寫點什麼，一直寫了又刪，想很久還是想不出來，就先放著吧！
 
-目前還在中研院打雜...
+至少有了第一篇文章！ [First Article](/blog/first-article)
 
 
 <!-- ### Process & Materials
