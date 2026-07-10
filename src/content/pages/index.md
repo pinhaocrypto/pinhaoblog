@@ -1,24 +1,16 @@
 ---
 templateKey: index-page
-title: My Name Is PIN HAO
-image: /img/clay-images-7.jpg
-description: A stunning Astro theme designed for captivating image-centric websites, perfect for photographers, portfolios, and blogs.
-heroImageLight: /img/hangang_morning.png
-heroImageDark: /img/hangang_night.png
+title: PIN HAO
+description: Pin Hao 是專注於後量子密碼、Ethereum 與高效能實作的密碼學工程師。
+heading: Cryptographic engineer building post-quantum and Ethereum systems.
+subheading: 我在中研院從事實用密碼學工程，也持續探索如何把研究做成真正有人使用的產品。
+heroImageLight: /img/hangang_morning.webp
+heroImageDark: /img/hangang_night.webp
 heroImageAlt: Seoul Hangang skyline
 ---
 
-## Recent Thoughts - 2025.12.31 Updated
+## Recent Thoughts
 
 想說主頁應該要寫點什麼，一直寫了又刪，想很久還是想不出來，就先放著吧！
 
 至少有了第一篇文章！ [First Article](/blog/first-article)
-
-
-<!-- ### Process & Materials
-
-Every piece is crafted in my home studio. I formulate my own glazes using locally sourced ash and minerals, resulting in surfaces that are unique to my environment. The firing process is a collaboration with the kiln; I can guide the heat, but the flame has the final say.
-
-When I am not in the studio, you can find me hiking the trails of the Cascades or scouring the beach for interesting stones and driftwood.
-
-<a href="https://unsplash.com/@tomcrewceramics" target="_blank">Image credits - Tom Crew</a> -->

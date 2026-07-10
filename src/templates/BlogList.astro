@@ -10,7 +10,8 @@ interface Props {
 
 const { entry, items = [], baseSlug = 'blog' } = Astro.props;
 const { Content } = await entry.render();
-const { title, description, manualList } = entry.data;
+const { title, description } = entry.data;
+const hasIntro = (entry.body ?? '').trim().length > 0;
 
 const groupByYear = (posts: CollectionEntry<'blog'>[]) => {
   const grouped = new Map<string | number, CollectionEntry<'blog'>[]>();
@@ -33,21 +34,49 @@ const groupByYear = (posts: CollectionEntry<'blog'>[]) => {
     }));
 };
 
-const groupedPosts = manualList ? [] : groupByYear(items as CollectionEntry<'blog'>[]);
+const groupedPosts = groupByYear(items as CollectionEntry<'blog'>[]);
 ---
 
 <Layout title={title} description={description}>
   <section class="blog-head">
+    <h1>{title}</h1>
     {description && <p class="blog-desc">{description}</p>}
   </section>
 
-  {Content && (
+  {hasIntro && (
     <article class="blog-intro">
       <div class="post-content-body">
         <Content />
       </div>
     </article>
   )}
+
+  <section class="blog-index" aria-label="文章列表">
+    {groupedPosts.map(({ year, posts }) => (
+      <div class="blog-year">
+        <h2>{year}</h2>
+        <ol>
+          {posts.map((post) => (
+            <li>
+              <a href={`/${baseSlug}/${post.slug}`}>
+                <span>{post.data.title}</span>
+                {post.data.date && (
+                  <time datetime={post.data.date.toISOString()}>
+                    {post.data.date.toLocaleDateString('zh-TW', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </time>
+                )}
+              </a>
+              {post.data.description && <p>{post.data.description}</p>}
+            </li>
+          ))}
+        </ol>
+      </div>
+    ))}
+  </section>
 </Layout>
 
 <style>
@@ -58,10 +87,18 @@ const groupedPosts = manualList ? [] : groupByYear(items as CollectionEntry<'blo
     padding: 0 1.5rem;
   }
 
-  .blog-desc {
+  .blog-head h1 {
     margin: 0;
-    font-size: 10rem;
-    line-height: 1.6;
+    font-family: var(--font-sans-serif);
+    font-size: clamp(3.6rem, 8vw, 7.2rem);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  .blog-desc {
+    margin: 1rem 0 0;
+    font-size: 1.8rem;
+    line-height: 1.5;
     color: var(--color-text-subtle, #666);
   }
 
@@ -69,5 +106,81 @@ const groupedPosts = manualList ? [] : groupByYear(items as CollectionEntry<'blo
     max-width: 760px;
     margin: 0 auto 3rem;
     padding: 0 1.5rem;
+  }
+
+  .blog-index {
+    max-width: 760px;
+    margin: 3rem auto 6rem;
+    padding: 0 1.5rem;
+  }
+
+  .blog-year {
+    display: grid;
+    grid-template-columns: minmax(6rem, 0.25fr) 1fr;
+    gap: 2rem;
+    padding: 2.4rem 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .blog-year h2 {
+    margin: 0;
+    font-family: var(--font-sans-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+
+  .blog-year ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .blog-year li + li {
+    margin-top: 2rem;
+  }
+
+  .blog-year a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2rem;
+    color: var(--color-base);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  .blog-year a span {
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    line-height: 1.2;
+  }
+
+  .blog-year time,
+  .blog-year p {
+    color: var(--color-text-subtle);
+  }
+
+  .blog-year time {
+    flex: none;
+    font-family: var(--font-sans-serif);
+    font-size: 1.2rem;
+  }
+
+  .blog-year p {
+    margin: 0.5rem 0 0;
+    font-size: 1.6rem;
+  }
+
+  @media (max-width: 600px) {
+    .blog-year {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+
+    .blog-year a {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
   }
 </style>

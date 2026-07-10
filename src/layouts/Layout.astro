@@ -8,68 +8,102 @@ import 'katex/dist/katex.min.css';
 import { ClientRouter } from 'astro:transitions';
 
 const SITE_TITLE = 'MNIPH';
+const SITE_NAME = 'Pin Hao';
+const DEFAULT_DESCRIPTION = 'Pin Hao 的個人網站：密碼學工程、後量子系統、Ethereum 與生活隨筆。';
 
 // Migrating logic from src/components/layout.js
 export interface Props {
 	title?: string;
     description?: string;
-    children?: any;
+    image?: string;
+    type?: 'website' | 'article';
+    publishedTime?: string;
 }
 
-const { title, description } = Astro.props;
+const {
+    title,
+    description = DEFAULT_DESCRIPTION,
+    image = '/img/hangang_morning.webp',
+    type = 'website',
+    publishedTime,
+} = Astro.props;
 const documentTitle = title && title !== SITE_TITLE ? `${title} | ${SITE_TITLE}` : SITE_TITLE;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+const socialImageURL = new URL(image, Astro.site ?? Astro.url);
+const currentYear = new Date().getFullYear();
+const currentPath = Astro.url.pathname;
+const navItems = [
+    { href: '/', label: 'Home' },
+    { href: '/bio', label: 'Bio' },
+    { href: '/work', label: 'Work' },
+    { href: '/blog', label: 'Blog' },
+];
 
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content={description || "Clay Theme"} />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/png" href="/img/bts-ph-logo.png" />
-		<meta name="generator" content={Astro.generator} />
+			<meta name="description" content={description} />
+			<meta name="viewport" content="width=device-width" />
+			<link rel="canonical" href={canonicalURL} />
+			<link rel="alternate" type="application/rss+xml" title={`${SITE_NAME} RSS`} href="/rss.xml" />
+			<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+			<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+			<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+			<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
+			<meta name="theme-color" content="#ffffff" />
+			<meta name="generator" content={Astro.generator} />
+			<meta property="og:site_name" content={SITE_NAME} />
+			<meta property="og:type" content={type} />
+			<meta property="og:title" content={documentTitle} />
+			<meta property="og:description" content={description} />
+			<meta property="og:url" content={canonicalURL} />
+			<meta property="og:image" content={socialImageURL} />
+			<meta property="og:locale" content="zh_TW" />
+			<meta name="twitter:card" content="summary_large_image" />
+			<meta name="twitter:title" content={documentTitle} />
+			<meta name="twitter:description" content={description} />
+			<meta name="twitter:image" content={socialImageURL} />
+			{type === 'article' && publishedTime && (
+				<meta property="article:published_time" content={publishedTime} />
+			)}
 		<title>{documentTitle}</title>
         <ClientRouter />
         <script is:inline>
             // Theme init
-            const theme = (() => {
-                if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-                    return localStorage.getItem('theme');
-                }
-                return 'light';
-            })();
+            const storedTheme = localStorage.getItem('theme');
+            const theme = storedTheme ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
             if (theme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
             } else {
                 document.documentElement.removeAttribute('data-theme');
             }
+            document.documentElement.style.colorScheme = theme;
+            document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#121212' : '#ffffff');
         </script>
 	</head>
 	<body class="site-wrapper">
 		<header class="site-head">
             <div class="site-head-container">
-                <a class="nav-burger" href="#">
-                    <div class="hamburger hamburger--collapse" aria-label="Menu" role="button" aria-controls="navigation">
-                        <div class="hamburger-box">
-                            <div class="hamburger-inner" />
-                        </div>
-                    </div>
-                </a>
-				<nav id="swup" class="site-head-left">
-					<ul class="nav" role="menu">
-						<li class="nav-home" role="menuitem">
-							<a href="/">Home</a>
-						</li>
-						<li class="nav-home" role="menuitem">
-							<a href="/bio">Bio</a>
-						</li>
-						<li class="nav-home" role="menuitem">
-							<a href="/work">Work</a>
-						</li>
-						<li class="nav-home" role="menuitem">
-							<a href="/blog">Blog</a>
-						</li>
+				<button class="nav-burger" type="button" aria-label="開啟選單" aria-controls="site-navigation" aria-expanded="false">
+					<span class="hamburger hamburger--collapse" aria-hidden="true">
+						<span class="hamburger-box">
+							<span class="hamburger-inner" />
+						</span>
+					</span>
+				</button>
+				<nav id="site-navigation" class="site-head-left" aria-label="主要導覽">
+					<ul class="nav">
+						{navItems.map(({ href, label }) => {
+							const isCurrent = href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+							return (
+								<li class:list={{ 'nav-current': isCurrent }}>
+									<a href={href} aria-current={isCurrent ? 'page' : undefined}>{label}</a>
+								</li>
+							);
+						})}
 					</ul>
 				</nav>
 	                <div class="site-head-center">
@@ -79,7 +113,7 @@ const documentTitle = title && title !== SITE_TITLE ? `${title} | ${SITE_TITLE}`
 	                </div>
                 <div class="site-head-right">
                     <div class="social-links">
-                        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+                        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="切換深色模式" aria-pressed="false">
                             <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                             <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                         </button>
@@ -89,29 +123,35 @@ const documentTitle = title && title !== SITE_TITLE ? `${title} | ${SITE_TITLE}`
         </header>
 
         <main id="site-main" class="site-main">
-            <div id="swup" class="transition-fade">
+            <div class="transition-fade">
                 <slot />
             </div>
         </main>
 
         <footer class="site-foot">
-            <div>© 2025 Clay | PINHAO</div>
+            <div>© {currentYear} {SITE_NAME}</div>
             <div>
-                Powered by <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> |
-                Licensed under <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT</a>
+                Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>
             </div>
         </footer>
 
         <script>
-            import { navigate } from 'astro:transitions/client';
-
             function initNav() {
-                const burger = document.querySelector('.nav-burger');
+                const burger = document.querySelector<HTMLButtonElement>('.nav-burger');
                 const wrapper = document.querySelector('.site-wrapper');
                 if (burger && wrapper) {
-                    burger.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        wrapper.classList.toggle('site-head-open');
+                    const setMenuOpen = (isOpen: boolean) => {
+                        wrapper.classList.toggle('site-head-open', isOpen);
+                        burger.setAttribute('aria-expanded', String(isOpen));
+                        burger.setAttribute('aria-label', isOpen ? '關閉選單' : '開啟選單');
+                    };
+
+                    burger.addEventListener('click', () => {
+                        setMenuOpen(!wrapper.classList.contains('site-head-open'));
+                    });
+
+                    wrapper.addEventListener('keydown', (event) => {
+                        if (event.key === 'Escape') setMenuOpen(false);
                     });
                 }
             }
@@ -128,6 +168,8 @@ const documentTitle = title && title !== SITE_TITLE ? `${title} | ${SITE_TITLE}`
                        sun.style.display = isDark ? 'inline-block' : 'none';
                        moon.style.display = isDark ? 'none' : 'inline-block';
                    }
+                   toggleBtn?.setAttribute('aria-pressed', String(isDark));
+                   toggleBtn?.setAttribute('aria-label', isDark ? '切換淺色模式' : '切換深色模式');
                 };
 
                 updateIcon();
@@ -143,6 +185,8 @@ const documentTitle = title && title !== SITE_TITLE ? `${title} | ${SITE_TITLE}`
                            document.documentElement.removeAttribute('data-theme');
                        }
                        localStorage.setItem('theme', newTheme);
+                       document.documentElement.style.colorScheme = newTheme;
+                       document.querySelector('meta[name="theme-color"]')?.setAttribute('content', newTheme === 'dark' ? '#121212' : '#ffffff');
                        updateIcon();
                    });
                 }
@@ -161,8 +205,12 @@ const documentTitle = title && title !== SITE_TITLE ? `${title} | ${SITE_TITLE}`
                 const theme = localStorage.getItem('theme');
                 if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                     document.documentElement.setAttribute('data-theme', 'dark');
+                    document.documentElement.style.colorScheme = 'dark';
+                    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#121212');
                 } else {
                      document.documentElement.removeAttribute('data-theme');
+                     document.documentElement.style.colorScheme = 'light';
+                     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#ffffff');
                 }
              });
         </script>
@@ -174,7 +222,7 @@ const documentTitle = title && title !== SITE_TITLE ? `${title} | ${SITE_TITLE}`
         background: var(--color-bg);
         color: var(--color-base); /* Ensure text respects theme */
         transition: background 0.3s ease-out, color 0.3s ease-out;
-        transition-delay: 0.25;
+        transition-delay: 0.25s;
         margin: 0;
     }
 
@@ -186,13 +234,15 @@ const documentTitle = title && title !== SITE_TITLE ? `${title} | ${SITE_TITLE}`
         display: flex;
         align-items: center;
         opacity: 0.8;
-        outline: none;
         -webkit-appearance: none;
         appearance: none;
         box-shadow: none;
     }
-    .theme-toggle:focus {
-        outline: none;
+    .theme-toggle:focus-visible,
+    .nav-burger:focus-visible,
+    a:focus-visible {
+        outline: 2px solid var(--color-primary-contrast);
+        outline-offset: 4px;
     }
     .theme-toggle:hover {
         opacity: 1;
@@ -423,6 +473,10 @@ const documentTitle = title && title !== SITE_TITLE ? `${title} | ${SITE_TITLE}`
         left: 0;
         z-index: 9999;
         padding: 12px 12px 12px 12px;
+        color: var(--color-base);
+        background: transparent;
+        border: 0;
+        cursor: pointer;
     }
 
     @media (max-width: 850px) {
@@ -507,7 +561,7 @@ const documentTitle = title && title !== SITE_TITLE ? `${title} | ${SITE_TITLE}`
         .site-head-open {
             background: var(--color-bg);
             transition: background 0.5s ease-out;
-            transition-delay: 0.25;
+            transition-delay: 0.25s;
             overflow: hidden;
             height: 100vh;
         }
@@ -544,6 +598,17 @@ const documentTitle = title && title !== SITE_TITLE ? `${title} | ${SITE_TITLE}`
             bottom: 0;
             transition: transform 0.3s cubic-bezier(0.4, 0.01, 0.165, 0.99);
             transform: translateY(-4vw);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            scroll-behavior: auto !important;
+            transition-duration: 0.01ms !important;
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
         }
     }
 </style>

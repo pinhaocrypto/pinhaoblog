@@ -120,6 +120,14 @@ production stylesheet in assets/built/screen.css using gulp dev
   text-align: center;
 }
 
+.post-content-date {
+  margin-top: -2vw;
+  margin-bottom: 3vw;
+  color: var(--color-text-subtle);
+  font-family: var(--font-sans-serif);
+  font-size: 1.3rem;
+}
+
 .post-content-excerpt {
   margin: -2vw 0 3vw;
   font-size: 2.2rem;

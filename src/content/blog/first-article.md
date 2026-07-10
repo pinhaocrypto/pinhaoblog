@@ -1,9 +1,8 @@
 ---
 templateKey: blog-post
-# thumbnail: /img/clay-images-4.jpg
 date: 2025-12-26T15:04:10.000Z
 title: First Article
-# description: Join us for a weekend of wheel throwing.
+description: 回顧 2025 年的工作、生活、運動與演唱會，也記下建立這個網站的過程。
 ---
 *2025.12.31 一篇單純我想到什麼就寫什麼的文章*
 
@@ -11,7 +10,7 @@ title: First Article
 
 我必須說我真的是一個想很多，而且拖延症蠻嚴重的人，如果沒有定下 Deadline 就會一直放著，拖到最後一刻，先感謝我的朋友 Ryan、Anton 跟他們 Co-work 的時候都會被逼著趕快完成，像是改履歷跟架這個網站。
 > Deadline -> Blackpink 讚 <p align="center">
-  <img src="/img/first-article/bp-deadline.png" />
+  <img src="/img/first-article/bp-deadline.webp" alt="BLACKPINK Deadline" loading="lazy" decoding="async" />
 </p>
 
 今年不知道為什麼覺得過很快，可能是因為開始上班的關係，當工作一忙起來就會完全沒有注意到時間的流速，或是每天一直重複上班下班，真的有種 NPC 感，只有 9 月去首爾的時候，完全放下工作，才有慢慢生活的感覺。現在回想起來，才稍微意識到時間的寶貴！
@@ -34,7 +33,7 @@ title: First Article
 
 今年也是看了不少演唱會，YOASOBI、J-Hope、優里、BLACKPINK、TWICE，想看的大部分都有看到，但必須說舞台最震撼、讓我覺得最爽的只能選 J-Hope，目前心目中最頂的演唱會也還是 18 年在桃園棒球場的 BTS。現在最大願望就是明年 BTS 的可以想看幾場就看幾場，跟著他們巡迴（？ 甚至開始在想要不要拍跳舞的 Reels，想從十年前的開始學，像是 BTS - Fake Love、Seventeen - Don't Wanna Cry、Wanna One - Energetic 這種臭老人復古風，畢竟新團的一堆人會跳。
 > J-Hope 演唱會 <p align="center">
-  <img src="/img/first-article/hope.jpeg" />
+  <img src="/img/first-article/hope.webp" alt="J-Hope 演唱會現場" loading="lazy" decoding="async" />
 </p>
 
 ---

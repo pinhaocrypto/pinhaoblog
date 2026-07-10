@@ -1,41 +1,31 @@
 import { defineCollection, z } from 'astro:content';
 
-const commonSchema = z.object({
+const pageSchema = z.object({
   title: z.string(),
   description: z.string().optional(),
   date: z.date().optional(),
   thumbnail: z.string().optional(),
   templateKey: z.string().optional(),
-  // Add other fields as discovered
-  image: z.string().optional(),
-  featuredimage: z.string().optional(),
   heroImageLight: z.string().optional(),
   heroImageDark: z.string().optional(),
   heroImageAlt: z.string().optional(),
   heading: z.string().optional(),
   subheading: z.string().optional(),
-  number: z.number().optional(),
-  pagetype: z.array(z.string()).optional(),
-  manualList: z.boolean().optional(),
-}).partial();
+});
 
 const blog = defineCollection({
   type: 'content',
-  schema: commonSchema,
-});
-
-const sold = defineCollection({
-  type: 'content',
-  schema: commonSchema,
+  schema: pageSchema.extend({
+    draft: z.boolean().default(false),
+  }),
 });
 
 const pages = defineCollection({
   type: 'content',
-  schema: commonSchema,
+  schema: pageSchema,
 });
 
 export const collections = {
   blog,
-  sold,
   pages,
 };
