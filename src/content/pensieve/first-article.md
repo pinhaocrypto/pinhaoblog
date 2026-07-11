@@ -2,9 +2,13 @@
 templateKey: blog-post
 date: 2025-12-26T15:04:10.000Z
 title: First Article
-description: 回顧 2025 年的工作、生活、運動與演唱會，也記下建立這個網站的過程。
+description: "一篇單純我想到什麼就寫什麼的文章"
+kind: essay
+status: settled
+topics:
+  - life
+  - reflection
 ---
-*2025.12.31 一篇單純我想到什麼就寫什麼的文章*
 
 先恭喜有了自己的網站，大概從一、兩年前就一直有想要架自己的網站，來來回回好久，用了不同的架構、設計，最後才完成了現在這個 Blog。在建立這個網站的過程中，有發現自己很喜歡藏一些小彩蛋或是小巧思，跟別人分享的時候也會覺得很開心！
 

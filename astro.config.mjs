@@ -8,7 +8,9 @@ import rehypeKatex from 'rehype-katex';
 // https://astro.build/config
 export default defineConfig({
     site: process.env.SITE_URL || process.env.URL || 'http://localhost:4321',
-    integrations: [sitemap()],
+    integrations: [sitemap({
+        filter: (page) => !new URL(page).pathname.startsWith('/blog'),
+    })],
     markdown: {
         remarkPlugins: [remarkMath, remarkEmoji],
         rehypePlugins: [rehypeKatex],

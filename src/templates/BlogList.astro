@@ -4,7 +4,7 @@ import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   entry: CollectionEntry<'pages'>;
-  items?: CollectionEntry<'blog'>[];
+  items?: CollectionEntry<'pensieve'>[];
   baseSlug?: string;
 }
 
@@ -12,9 +12,21 @@ const { entry, items = [], baseSlug = 'blog' } = Astro.props;
 const { Content } = await entry.render();
 const { title, description } = entry.data;
 const hasIntro = (entry.body ?? '').trim().length > 0;
+const kindLabels = {
+  note: 'Note',
+  essay: 'Essay',
+  question: 'Question',
+  memory: 'Memory',
+};
+const statusLabels = {
+  ripple: 'Ripple',
+  developing: 'Developing',
+  settled: 'Settled',
+  revisited: 'Revisited',
+};
 
-const groupByYear = (posts: CollectionEntry<'blog'>[]) => {
-  const grouped = new Map<string | number, CollectionEntry<'blog'>[]>();
+const groupByYear = (posts: CollectionEntry<'pensieve'>[]) => {
+  const grouped = new Map<string | number, CollectionEntry<'pensieve'>[]>();
   posts.forEach((post) => {
     const date = post.data.date ? new Date(post.data.date) : null;
     const year = date && !Number.isNaN(date.getFullYear()) ? date.getFullYear() : 'Undated';
@@ -34,14 +46,15 @@ const groupByYear = (posts: CollectionEntry<'blog'>[]) => {
     }));
 };
 
-const groupedPosts = groupByYear(items as CollectionEntry<'blog'>[]);
+const groupedPosts = groupByYear(items as CollectionEntry<'pensieve'>[]);
 ---
 
 <Layout title={title} description={description}>
-  <section class="blog-head">
+  <header class="blog-head page-marker">
+    <span aria-hidden="true">03</span>
     <h1>{title}</h1>
     {description && <p class="blog-desc">{description}</p>}
-  </section>
+  </header>
 
   {hasIntro && (
     <article class="blog-intro">
@@ -51,7 +64,7 @@ const groupedPosts = groupByYear(items as CollectionEntry<'blog'>[]);
     </article>
   )}
 
-  <section class="blog-index" aria-label="文章列表">
+  <section class="blog-index" aria-label="Pensieve entries">
     {groupedPosts.map(({ year, posts }) => (
       <div class="blog-year">
         <h2>{year}</h2>
@@ -70,6 +83,11 @@ const groupedPosts = groupByYear(items as CollectionEntry<'blog'>[]);
                   </time>
                 )}
               </a>
+              <div class="thought-meta" aria-label="內容資訊">
+                <span>{kindLabels[post.data.kind]}</span>
+                <span>{statusLabels[post.data.status]}</span>
+                {post.data.topics.map((topic) => <span>#{topic}</span>)}
+              </div>
               {post.data.description && <p>{post.data.description}</p>}
             </li>
           ))}
@@ -87,16 +105,9 @@ const groupedPosts = groupByYear(items as CollectionEntry<'blog'>[]);
     padding: 0 1.5rem;
   }
 
-  .blog-head h1 {
-    margin: 0;
-    font-family: var(--font-sans-serif);
-    font-size: clamp(3.6rem, 8vw, 7.2rem);
-    font-weight: 500;
-    letter-spacing: 0.04em;
-  }
-
   .blog-desc {
-    margin: 1rem 0 0;
+    flex-basis: 100%;
+    margin: 0.8rem 0 0 3.6rem;
     font-size: 1.8rem;
     line-height: 1.5;
     color: var(--color-text-subtle, #666);
@@ -160,6 +171,18 @@ const groupedPosts = groupByYear(items as CollectionEntry<'blog'>[]);
     color: var(--color-text-subtle);
   }
 
+  .thought-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin-top: 0.7rem;
+    color: var(--color-text-subtle);
+    font-family: var(--font-sans-serif);
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
   .blog-year time {
     flex: none;
     font-family: var(--font-sans-serif);
@@ -172,6 +195,10 @@ const groupedPosts = groupByYear(items as CollectionEntry<'blog'>[]);
   }
 
   @media (max-width: 600px) {
+    .blog-desc {
+      margin-left: 0;
+    }
+
     .blog-year {
       grid-template-columns: 1fr;
       gap: 1.2rem;

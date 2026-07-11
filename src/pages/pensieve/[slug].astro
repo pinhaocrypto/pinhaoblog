@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import WorkTemplate from '../../templates/Work.astro';
+
+export async function getStaticPaths() {
+  const entries = (await getCollection('pensieve')).filter(
+    (entry) => !import.meta.env.PROD || !entry.data.draft,
+  );
+
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+---
+
+<WorkTemplate entry={entry} />

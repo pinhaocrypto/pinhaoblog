@@ -6,7 +6,7 @@ import BlogList from '../templates/BlogList.astro';
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
 
-  const blogEntries = (await getCollection('blog')).filter(
+  const blogEntries = (await getCollection('pensieve')).filter(
     (entry) => !import.meta.env.PROD || !entry.data.draft,
   );
 
@@ -20,9 +20,9 @@ export async function getStaticPaths() {
     let items = [];
     let baseSlug = '';
 
-    if (entry.data.templateKey === 'news-page') {
+    if (entry.data.templateKey === 'pensieve-page') {
         items = sortedBlog;
-        baseSlug = 'blog';
+        baseSlug = 'pensieve';
     }
 
     return {
@@ -36,7 +36,7 @@ const { entry, items, baseSlug } = Astro.props;
 const templateKey = entry.data.templateKey;
 ---
 
-{templateKey === 'news-page' ? (
+{templateKey === 'pensieve-page' ? (
     <BlogList entry={entry} items={items} baseSlug={baseSlug} />
 ) : (
     <Page entry={entry} />

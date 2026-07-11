@@ -1,9 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import WorkTemplate from '../../templates/Work.astro';
 
 export async function getStaticPaths() {
-  const entries = (await getCollection('blog')).filter(
+  const entries = (await getCollection('pensieve')).filter(
     (entry) => !import.meta.env.PROD || !entry.data.draft,
   );
   return entries.map((entry) => ({
@@ -13,6 +12,5 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
+return Astro.redirect(`/pensieve/${entry.slug}`, 301);
 ---
-
-<WorkTemplate entry={entry} />

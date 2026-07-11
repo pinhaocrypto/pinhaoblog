@@ -3,13 +3,25 @@ import Layout from '../layouts/Layout.astro';
 import { type CollectionEntry } from 'astro:content';
 
 interface Props {
-  entry: CollectionEntry<'blog'>;
+  entry: CollectionEntry<'pensieve'>;
 }
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 const { title, description, thumbnail } = entry.data;
+const kindLabels = {
+  note: 'Note',
+  essay: 'Essay',
+  question: 'Question',
+  memory: 'Memory',
+};
+const statusLabels = {
+  ripple: 'Ripple',
+  developing: 'Developing',
+  settled: 'Settled',
+  revisited: 'Revisited',
+};
 
 ---
 
@@ -22,6 +34,11 @@ const { title, description, thumbnail } = entry.data;
 >
   <article class={`post-content ${thumbnail ? '' : 'no-image'}`}>
     <header class="post-content-header">
+      <div class="thought-meta">
+        <span>{kindLabels[entry.data.kind]}</span>
+        <span>{statusLabels[entry.data.status]}</span>
+        {entry.data.topics.map((topic) => <span>#{topic}</span>)}
+      </div>
       <h1 class="post-content-title">{title}</h1>
       {entry.data.date && (
         <time class="post-content-date" datetime={entry.data.date.toISOString()}>
@@ -45,3 +62,18 @@ const { title, description, thumbnail } = entry.data;
     </div>
   </article>
 </Layout>
+
+<style>
+  .thought-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-subtle);
+    font-family: var(--font-sans-serif);
+    font-size: 1.1rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>

@@ -36,10 +36,10 @@ Netlify's standard `URL` environment variable is also supported as a fallback. T
 ## Content
 
 - Pages: `src/content/pages/`
-- Blog posts: `src/content/blog/`
+- Pensieve entries: `src/content/pensieve/`
 - Images: `public/img/`
 
-Set `draft: true` in a blog post's frontmatter to exclude it from production builds and RSS while keeping it visible during local development.
+Set `draft: true` in a Pensieve entry's frontmatter to exclude it from production builds and RSS while keeping it visible during local development. Entries can be Notes, Essays, Questions, or Memories, with a status from Ripple to Revisited.
 
 ## Credits
 

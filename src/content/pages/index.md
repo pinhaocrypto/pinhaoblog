@@ -1,16 +1,30 @@
 ---
 templateKey: index-page
 title: PIN HAO
-description: Pin Hao 是專注於後量子密碼、Ethereum 與高效能實作的密碼學工程師。
-heading: Cryptographic engineer building post-quantum and Ethereum systems.
-subheading: 我在中研院從事實用密碼學工程，也持續探索如何把研究做成真正有人使用的產品。
+description: Pin Hao 的個人書寫空間，記錄技術、工作、學習、生活，以及還沒有答案的問題。
+heading: Hi, I’m Pin-Hao.
+subheading: 這裡記錄我如何理解技術、工作、生活與自己。
 heroImageLight: /img/hangang_morning.webp
 heroImageDark: /img/hangang_night.webp
 heroImageAlt: Seoul Hangang skyline
 ---
 
-## Recent Thoughts
+## Now — July 2026
 
-想說主頁應該要寫點什麼，一直寫了又刪，想很久還是想不出來，就先放著吧！
+### Working on
 
-至少有了第一篇文章！ [First Article](/blog/first-article)
+- Post Quantum Cryptography 的性能優化
+- PQConnect
+
+### Exploring
+
+
+### Practicing
+
+- Just ask
+- Tennis
+
+## Questions I keep returning to
+
+- 我真正享受的工作是什麼？
+- 我想成為什麼樣的工程師，也想成為什麼樣的人？

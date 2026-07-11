@@ -13,9 +13,9 @@ media_folder: public/img
 public_folder: /img
 
 collections:
-  - name: blog
-    label: Blog
-    folder: src/content/blog
+  - name: pensieve
+    label: Pensieve
+    folder: src/content/pensieve
     create: true
     slug: "{{slug}}"
     fields:
@@ -24,6 +24,18 @@ collections:
       - { label: Description, name: description, widget: text, required: false }
       - { label: Publish Date, name: date, widget: datetime }
       - { label: Draft, name: draft, widget: boolean, default: false }
+      - label: Kind
+        name: kind
+        widget: select
+        default: note
+        options: [note, essay, question, memory]
+      - label: Status
+        name: status
+        widget: select
+        default: ripple
+        options: [ripple, developing, settled, revisited]
+      - { label: Topics, name: topics, widget: list, required: false, default: [] }
+      - { label: Last Revisited, name: updated, widget: datetime, required: false }
       - { label: Thumbnail, name: thumbnail, widget: image, choose_url: false, required: false }
       - { label: Body, name: body, widget: markdown }
 
@@ -37,8 +49,8 @@ collections:
           - { label: Template Key, name: templateKey, widget: hidden, default: index-page }
           - { label: Name, name: title, widget: string }
           - { label: SEO Description, name: description, widget: text }
-          - { label: Main Heading, name: heading, widget: string }
-          - { label: Introduction, name: subheading, widget: text }
+          - { label: Opening Line, name: heading, widget: string }
+          - { label: Garden Introduction, name: subheading, widget: text }
           - { label: Light Hero, name: heroImageLight, widget: image, choose_url: false }
           - { label: Dark Hero, name: heroImageDark, widget: image, choose_url: false, required: false }
           - { label: Hero Alt Text, name: heroImageAlt, widget: string }
@@ -64,11 +76,11 @@ collections:
           - { label: SEO Description, name: description, widget: text }
           - { label: Body, name: body, widget: markdown }
 
-      - file: src/content/pages/blog.md
-        label: Blog Index
-        name: blog
+      - file: src/content/pages/pensieve.md
+        label: Pensieve Index
+        name: pensieve
         fields:
-          - { label: Template Key, name: templateKey, widget: hidden, default: news-page }
+          - { label: Template Key, name: templateKey, widget: hidden, default: pensieve-page }
           - { label: Date, name: date, widget: datetime, required: false }
           - { label: Title, name: title, widget: string }
           - { label: Description, name: description, widget: text }
