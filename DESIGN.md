@@ -112,7 +112,7 @@ Do not use box shadows for ordinary content. Hover and focus states may change o
 - **Site navigation:** a quiet horizontal list around the MNIPH wordmark. On mobile it becomes a keyboard-accessible disclosure menu. Pensieve replaces Blog as the canonical writing destination.
 - **Home opening:** a modest greeting and one explanatory sentence. Never expand it back into a professional slogan, résumé summary, or CTA row.
 - **Home sections:** recent writing, Now, and recurring questions are separated by thin rules and spacing rather than cards.
-- **Page marker:** a small numbered marker such as `01 / Bio`; it orients without competing with content.
+- **Page marker:** a small text label such as `Bio` or `Work`; it orients without competing with content or implying a required sequence.
 - **Pensieve index:** chronological groups with entry title, date, kind, topics, optional updated date, and description. Entry titles are the dominant element.
 - **Thought metadata:** compact sans-serif labels. They should read like archival notation, not colorful badges.
 - **Article body:** a narrow long-form column with clear headings, comfortable lists, code treatment, and full-width images only when the material benefits.

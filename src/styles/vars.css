@@ -19,6 +19,8 @@
     --color-code-text: #080808;
     --color-code-bg: #eeeeee;
     --color-primary-contrast: #2a7fb8;
+    --color-selection-bg: #cbeafb;
+    --color-selection-text: #131313;
 
     /* Fonts */
     --font-sans-serif: 'League Spartan', 'Trebuchet MS', Arial, sans-serif;
@@ -71,6 +73,8 @@
     --color-code-text: #f5f5f5;
     --color-code-bg: #1e1e1e;
     --color-primary-contrast: #8fd8ff;
+    --color-selection-bg: #8fd8ff;
+    --color-selection-text: #121212;
 
 
     /* Old BG--color-bg: #f8f8f8;*/

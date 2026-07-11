@@ -2,7 +2,6 @@
 templateKey: blog-post
 date: 2026-07-11T00:00:00.000+08:00
 title: 什麼值得寫？
-description: "關於動筆前的不安全感、被社群媒體分散的注意力，以及單純開始寫這件事。"
 kind: note
 topics:
   - writing

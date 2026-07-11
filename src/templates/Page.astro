@@ -10,11 +10,6 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 const { title, description, thumbnail } = entry.data;
-const pageNumbers: Record<string, string> = {
-  bio: '01',
-  work: '02',
-};
-const pageNumber = pageNumbers[entry.slug];
 
 // Image handling: thumbnail is string path to /public/img/...
 // In Astro, if it is in public, just use the path.
@@ -24,7 +19,6 @@ const pageNumber = pageNumbers[entry.slug];
 <Layout title={title} description={description}>
   <article class={`post-content ${thumbnail ? '' : 'no-image'}`}>
     <header class="page-marker">
-      {pageNumber && <span aria-hidden="true">{pageNumber}</span>}
       <h1>{title}</h1>
     </header>
 
@@ -34,7 +28,7 @@ const pageNumber = pageNumbers[entry.slug];
       </div>
     )}
 
-    <div class="post-content-body">
+    <div class:list={['post-content-body', { 'bio-content': entry.slug === 'bio' }]}>
       <Content />
     </div>
 

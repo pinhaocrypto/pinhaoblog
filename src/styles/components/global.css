@@ -279,8 +279,9 @@ body {
 }
 
 ::selection {
+    color: var(--color-selection-text);
     text-shadow: none;
-    background: #cbeafb;
+    background: var(--color-selection-bg);
 }
 
 hr {
