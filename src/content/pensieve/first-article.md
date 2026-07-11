@@ -4,7 +4,6 @@ date: 2025-12-26T15:04:10.000Z
 title: First Article
 description: "一篇單純我想到什麼就寫什麼的文章"
 kind: essay
-status: settled
 topics:
   - life
   - reflection

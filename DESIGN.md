@@ -71,7 +71,7 @@ The Creative North Star is **The Quiet Pensieve**: a personal editorial archive 
 
 Reading comes first. Use a narrow content column around 720–760px, generous vertical intervals, simple rules, and open space. Hierarchy should come from typography, rhythm, chronology, and relationships between entries rather than containers or promotional sections.
 
-The site is a brand surface, but expression must remain quiet. Distinctiveness comes from the Pensieve vocabulary, bilingual voice, editorial type, personal images, dates, states, and recurring questions. Avoid making every page visually dramatic.
+The site is a brand surface, but expression must remain quiet. Distinctiveness comes from the Pensieve vocabulary, bilingual voice, editorial type, personal images, dates, visible revisions, and recurring questions. Avoid making every page visually dramatic.
 
 Motion is sparse and functional: 150–250ms ease-out transitions for navigation, theme changes, and state feedback. Always respect reduced-motion preferences. Never animate merely to make the site feel magical.
 
@@ -81,7 +81,7 @@ The palette is ink on paper in light mode and soft ink on near-black paper in da
 
 - **Ink (`#131313`):** primary text and headings. It is softer than pure black.
 - **Paper (`#FFFFFF`):** the light reading surface.
-- **Muted Ink (`#5A5A5A`):** dates, status, descriptions, and secondary orientation.
+- **Muted Ink (`#5A5A5A`):** dates, descriptions, and secondary orientation.
 - **Rule (`#DDDDDD`):** quiet separators between accumulated material.
 - **Quiet Surface (`#F5F5F5`):** code, tables, and rare grouped utility areas, not generic cards.
 - **Night Paper (`#121212`) / Night Ink (`#E0E0E0`):** dark-mode reading pair.
@@ -94,7 +94,7 @@ Keep the site predominantly neutral. Personal images may introduce color. Do not
 Typography carries the identity.
 
 - **Narrative and entry titles:** EB Garamond with Traditional Chinese serif fallbacks. Use regular weight, generous leading, and readable 45–75 character line lengths.
-- **Navigation, section labels, metadata, and Pensieve state:** League Spartan with system sans-serif fallbacks.
+- **Navigation, section labels, and metadata:** League Spartan with system sans-serif fallbacks.
 - **Chinese text:** allow the browser to fall through to Noto Serif TC, PingFang TC, or Microsoft JhengHei as currently configured. Do not force all bilingual content into a single generic sans-serif.
 - **Page identity:** Bio, Work, and Pensieve use small orientation markers rather than display-sized titles.
 - **Article titles:** may be visually prominent, but should remain editorial rather than promotional.
@@ -113,7 +113,7 @@ Do not use box shadows for ordinary content. Hover and focus states may change o
 - **Home opening:** a modest greeting and one explanatory sentence. Never expand it back into a professional slogan, résumé summary, or CTA row.
 - **Home sections:** recent writing, Now, and recurring questions are separated by thin rules and spacing rather than cards.
 - **Page marker:** a small numbered marker such as `01 / Bio`; it orients without competing with content.
-- **Pensieve index:** chronological groups with entry title, date, kind, state, topics, and description. Entry titles are the dominant element.
+- **Pensieve index:** chronological groups with entry title, date, kind, topics, optional updated date, and description. Entry titles are the dominant element.
 - **Thought metadata:** compact sans-serif labels. They should read like archival notation, not colorful badges.
 - **Article body:** a narrow long-form column with clear headings, comfortable lists, code treatment, and full-width images only when the material benefits.
 - **Links:** use visible underlines or another unambiguous text treatment. Keep hover changes restrained and preserve keyboard focus rings.
@@ -124,7 +124,7 @@ Do not use box shadows for ordinary content. Hover and focus states may change o
 ### Do
 
 - Do make it easy to start reading from any page.
-- Do preserve dates, revision states, unresolved questions, and signs of change.
+- Do preserve dates, concrete revision history, unresolved questions, and signs of change.
 - Do allow technical work, personal reflection, music, tennis, travel, and relationships to coexist.
 - Do use generous whitespace and thin rules to create rhythm.
 - Do keep text comfortably readable on mobile and desktop.
@@ -140,4 +140,4 @@ Do not use box shadows for ordinary content. Hover and focus states may change o
 - Don't turn Pensieve kinds into loud category colors or icon tiles.
 - Don't remove personal or unfinished material merely because it does not support one career narrative.
 - Don't use animation as decoration or simulate a literal magical basin.
-- Don't make the system so polished that Ripple and Developing entries feel out of place.
+- Don't make the system so polished that unfinished entries feel out of place.

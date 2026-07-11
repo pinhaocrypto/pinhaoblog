@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { type CollectionEntry } from 'astro:content';
+import { topicToSlug } from '../lib/pensieve';
 
 interface Props {
   entry: CollectionEntry<'pensieve'>;
@@ -16,13 +17,6 @@ const kindLabels = {
   question: 'Question',
   memory: 'Memory',
 };
-const statusLabels = {
-  ripple: 'Ripple',
-  developing: 'Developing',
-  settled: 'Settled',
-  revisited: 'Revisited',
-};
-
 ---
 
 <Layout
@@ -36,8 +30,12 @@ const statusLabels = {
     <header class="post-content-header">
       <div class="thought-meta">
         <span>{kindLabels[entry.data.kind]}</span>
-        <span>{statusLabels[entry.data.status]}</span>
-        {entry.data.topics.map((topic) => <span>#{topic}</span>)}
+        {entry.data.updated && (
+          <span>Updated <time datetime={entry.data.updated.toISOString()}>{entry.data.updated.toLocaleDateString('zh-TW')}</time></span>
+        )}
+        {entry.data.topics.map((topic) => (
+          <a href={`/pensieve/topic/${topicToSlug(topic)}`}>#{topic}</a>
+        ))}
       </div>
       <h1 class="post-content-title">{title}</h1>
       {entry.data.date && (

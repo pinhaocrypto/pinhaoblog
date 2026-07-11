@@ -39,7 +39,7 @@ Netlify's standard `URL` environment variable is also supported as a fallback. T
 - Pensieve entries: `src/content/pensieve/`
 - Images: `public/img/`
 
-Set `draft: true` in a Pensieve entry's frontmatter to exclude it from production builds and RSS while keeping it visible during local development. Entries can be Notes, Essays, Questions, or Memories, with a status from Ripple to Revisited.
+Set `draft: true` in a Pensieve entry's frontmatter to exclude it from production builds and RSS while keeping it visible during local development. Entries can be Notes, Essays, Questions, or Memories, and may include an `updated` date when they are meaningfully revised.
 
 ## Credits
 

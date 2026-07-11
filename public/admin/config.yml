@@ -29,13 +29,8 @@ collections:
         widget: select
         default: note
         options: [note, essay, question, memory]
-      - label: Status
-        name: status
-        widget: select
-        default: ripple
-        options: [ripple, developing, settled, revisited]
       - { label: Topics, name: topics, widget: list, required: false, default: [] }
-      - { label: Last Revisited, name: updated, widget: datetime, required: false }
+      - { label: Last Updated, name: updated, widget: datetime, required: false }
       - { label: Thumbnail, name: thumbnail, widget: image, choose_url: false, required: false }
       - { label: Body, name: body, widget: markdown }
 

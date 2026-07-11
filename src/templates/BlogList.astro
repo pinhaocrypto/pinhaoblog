@@ -33,13 +33,6 @@ const kindLabels = {
   question: 'Question',
   memory: 'Memory',
 };
-const statusLabels = {
-  ripple: 'Ripple',
-  developing: 'Developing',
-  settled: 'Settled',
-  revisited: 'Revisited',
-};
-
 const groupByYear = (posts: CollectionEntry<'pensieve'>[]) => {
   const grouped = new Map<string | number, CollectionEntry<'pensieve'>[]>();
   posts.forEach((post) => {
@@ -102,7 +95,6 @@ const groupedPosts = groupByYear(items as CollectionEntry<'pensieve'>[]);
               </a>
               <div class="thought-meta" aria-label="內容資訊">
                 <span class="thought-kind">{kindLabels[post.data.kind]}</span>
-                <span class="thought-status">{statusLabels[post.data.status]}</span>
                 {post.data.updated && (
                   <span class="thought-updated">
                     Updated <time datetime={post.data.updated.toISOString()}>{post.data.updated.toLocaleDateString('zh-TW')}</time>
@@ -226,7 +218,6 @@ const groupedPosts = groupByYear(items as CollectionEntry<'pensieve'>[]);
   }
 
   .thought-kind,
-  .thought-status,
   .thought-updated {
     text-transform: uppercase;
   }

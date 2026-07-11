@@ -18,7 +18,6 @@ const pensieve = defineCollection({
   schema: pageSchema.extend({
     draft: z.boolean().default(false),
     kind: z.enum(['note', 'essay', 'question', 'memory']).default('note'),
-    status: z.enum(['ripple', 'developing', 'settled', 'revisited']).default('ripple'),
     topics: z.array(z.string()).default([]),
     updated: z.date().optional(),
   }),

@@ -57,12 +57,7 @@ The Pensieve holds four kinds of entries:
 - **Question:** something worth returning to repeatedly.
 - **Memory:** a life record involving people, music, travel, sports, or a specific moment.
 
-Entries also carry a state:
-
-- **Ripple:** newly deposited.
-- **Developing:** actively changing or accumulating related material.
-- **Settled:** coherent enough to rest for now.
-- **Revisited:** returned to with a newer perspective.
+Entries may carry an updated date when they are meaningfully revised or revisited. Show that concrete history rather than asking readers to interpret an abstract status system.
 
 ## Design Intent
 
