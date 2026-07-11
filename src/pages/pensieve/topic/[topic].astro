@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import { sortPensieveEntries, topicToSlug, visiblePensieveEntries } from '../../../lib/pensieve';
+import BlogList from '../../../templates/BlogList.astro';
+
+export async function getStaticPaths() {
+  const entries = visiblePensieveEntries(await getCollection('pensieve'));
+  const topics = new Map<string, string>();
+
+  entries.forEach((entry) => {
+    entry.data.topics.forEach((topic) => topics.set(topicToSlug(topic), topic));
+  });
+
+  return Array.from(topics, ([topicSlug, topic]) => ({
+    params: { topic: topicSlug },
+    props: {
+      topic,
+      items: sortPensieveEntries(
+        entries.filter((entry) => entry.data.topics.some((value) => topicToSlug(value) === topicSlug)),
+      ),
+    },
+  }));
+}
+
+const { topic, items } = Astro.props;
+---
+
+<BlogList
+  title={`#${topic}`}
+  description={`Pensieve 裡與 ${topic} 有關的想法。`}
+  items={items}
+  baseSlug="pensieve"
+  backHref="/pensieve"
+  backLabel="回到全部想法"
+/>

@@ -130,9 +130,7 @@ const navItems = [
 
         <footer class="site-foot">
             <div>© {currentYear} {SITE_NAME}</div>
-            <div>
-                Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>
-            </div>
+            <div>Some thoughts settle. Others come back changed.</div>
         </footer>
 
         <script>
@@ -146,13 +144,13 @@ const navItems = [
                         burger.setAttribute('aria-label', isOpen ? '關閉選單' : '開啟選單');
                     };
 
-                    burger.addEventListener('click', () => {
+                    burger.onclick = () => {
                         setMenuOpen(!wrapper.classList.contains('site-head-open'));
-                    });
+                    };
 
-                    wrapper.addEventListener('keydown', (event) => {
+                    wrapper.onkeydown = (event) => {
                         if (event.key === 'Escape') setMenuOpen(false);
-                    });
+                    };
                 }
             }
 
@@ -175,7 +173,7 @@ const navItems = [
                 updateIcon();
 
                 if (toggleBtn) {
-                   toggleBtn.addEventListener('click', () => {
+                   toggleBtn.onclick = () => {
                        const currentTheme = document.documentElement.getAttribute('data-theme');
                        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
@@ -188,7 +186,7 @@ const navItems = [
                        document.documentElement.style.colorScheme = newTheme;
                        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', newTheme === 'dark' ? '#121212' : '#ffffff');
                        updateIcon();
-                   });
+                   };
                 }
             }
 
@@ -230,7 +228,9 @@ const navItems = [
         background: transparent;
         border: none;
         cursor: pointer;
-        padding: 0;
+        width: 4.4rem;
+        height: 4.4rem;
+        padding: 1rem;
         display: flex;
         align-items: center;
         opacity: 0.8;
@@ -257,13 +257,13 @@ const navItems = [
         color: var(--color-base);
     }
     .sun-icon {
-        color: #FFD700; /* Yellow */
+        color: var(--color-base);
     }
     .moon-icon {
-        color: #333; /* Gray/Black */
+        color: var(--color-base);
     }
     [data-theme='dark'] .moon-icon {
-        color: #eee; /* Light gray if ever visible in improper state, but mostly replacing sun */
+        color: var(--color-base);
     }
 
     .img {
@@ -315,27 +315,27 @@ const navItems = [
 
     .page-head-title {
         margin: 0;
-        font-size: 4.2rem;
+        font-size: var(--text-page-title);
         color: var(--color-base);
         font-weight: 400;
     }
 
     @media (max-width: 500px) {
         .page-head-title {
-            font-size: 2rem;
+            font-size: var(--text-lead);
         }
     }
 
     .page-head-description {
         margin: 0 0 1.6vw;
         color: color(var(--color-border) l(-20%));
-        font-size: 2.2rem;
+        font-size: var(--text-lead);
         line-height: 1.35em;
     }
 
     @media (max-width: 500px) {
         .page-head-description {
-            font-size: 1.6rem;
+            font-size: var(--text-body);
         }
     }
 
@@ -347,7 +347,7 @@ const navItems = [
         text-align: center;
         color: var(--color-base);
         opacity: 0.6;
-        font-size: 1.3rem;
+        font-size: var(--text-label);
         line-height: 1.6;
     }
 
@@ -368,7 +368,7 @@ const navItems = [
         position: relative;
         z-index: 300;
         margin-top: -10px;
-        font-size: 1.35rem;
+        font-size: var(--text-label);
     }
 
     .site-head-container {
@@ -408,7 +408,7 @@ const navItems = [
         color: var(--color-base);
         font-family: var(--font-sans-serif);
         font-weight: 400;
-        font-size: 1.8rem; /* Increased size again */
+        font-size: var(--text-body);
         text-transform: lowercase;
         font-variant: small-caps;
         letter-spacing: 1px;
@@ -434,7 +434,7 @@ const navItems = [
         display: block;
         padding: 10px;
         color: var(--color-base);
-        font-size: 3rem;
+        font-size: var(--text-opening);
         line-height: 1em;
         font-weight: 500;
         text-transform: uppercase;
@@ -471,7 +471,7 @@ const navItems = [
         display: none;
         position: absolute;
         left: 0;
-        z-index: 9999;
+        z-index: 400;
         padding: 12px 12px 12px 12px;
         color: var(--color-base);
         background: transparent;
@@ -492,7 +492,7 @@ const navItems = [
             height: 40px;
             background: rgba(255, 255, 255, 0);
             z-index: -1;
-            transition: all 0.4s ease-out;
+            transition: background 0.4s ease-out, opacity 0.2s ease-out;
             overflow: hidden;
         }
         .site-head-left,
@@ -500,14 +500,13 @@ const navItems = [
             position: relative;
             z-index: -1;
             height: auto;
-            transition: height 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
             transition-delay: 1s;
         }
         .site-head-left a,
         .site-head-right a {
             margin: 8px 0;
             padding: 1px 0;
-            font-size: 2.6rem;
+            font-size: var(--text-subheading);
             line-height: 1.15em;
             font-weight: 200;
             opacity: 0;
@@ -518,7 +517,7 @@ const navItems = [
         .site-head-right a {
             padding: 5px 0;
             margin: 1px 0;
-            font-size: 2rem;
+            font-size: var(--text-lead);
         }
         .nav {
             width: 100%;
@@ -550,7 +549,7 @@ const navItems = [
         }
 
         .site-head-logo {
-            font-size: 2rem;
+            font-size: var(--text-lead);
             letter-spacing: 1px;
             text-align: center;
             max-width: 80%;
@@ -568,14 +567,13 @@ const navItems = [
 
         .site-head-open .site-head-container {
             height: 100vh;
-            transition: height 0.2s ease-in;
+            transition: opacity 0.2s ease-out;
         }
 
         .site-head-open .site-head-left,
         .site-head-open .site-head-right {
-            z-index: 9999;
+            z-index: 400;
             height: auto;
-            transition: height 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
         }
 
         .site-head-open .site-head-left a,
@@ -594,7 +592,7 @@ const navItems = [
         .site-head-open .site-foot {
             display: block;
             position: fixed;
-            z-index: 9999;
+            z-index: 400;
             bottom: 0;
             transition: transform 0.3s cubic-bezier(0.4, 0.01, 0.165, 0.99);
             transform: translateY(-4vw);

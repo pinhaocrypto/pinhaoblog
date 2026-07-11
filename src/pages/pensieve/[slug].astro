@@ -1,11 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import WorkTemplate from '../../templates/Work.astro';
+import { visiblePensieveEntries } from '../../lib/pensieve';
 
 export async function getStaticPaths() {
-  const entries = (await getCollection('pensieve')).filter(
-    (entry) => !import.meta.env.PROD || !entry.data.draft,
-  );
+  const entries = visiblePensieveEntries(await getCollection('pensieve'));
 
   return entries.map((entry) => ({
     params: { slug: entry.slug },

@@ -24,11 +24,21 @@ typography:
     fontSize: 17px
     fontWeight: 400
     lineHeight: 1.65
+  lead:
+    fontFamily: EB Garamond
+    fontSize: 21px
+    fontWeight: 400
+    lineHeight: 1.45
   entry-title:
     fontFamily: EB Garamond
     fontSize: 32px
     fontWeight: 400
     lineHeight: 1.25
+  subheading:
+    fontFamily: EB Garamond
+    fontSize: 26px
+    fontWeight: 400
+    lineHeight: 1.3
   label:
     fontFamily: League Spartan
     fontSize: 13px

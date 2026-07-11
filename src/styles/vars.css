@@ -21,8 +21,8 @@
     --color-primary-contrast: #2a7fb8;
 
     /* Fonts */
-    --font-sans-serif: 'Futura', 'League Spartan', 'Trebuchet MS', Arial, sans-serif;
-    --font-serif: 'EB Garamond', Georgia, Times, serif;
+    --font-sans-serif: 'League Spartan', 'Trebuchet MS', Arial, sans-serif;
+    --font-serif: 'EB Garamond', 'Noto Serif TC', 'Source Han Serif TC', 'Songti TC', Georgia, Times, serif;
     --font-mono: Menlo, Courier, monospace;
     --font-light: 100;
     --font-normal: 400;
@@ -40,6 +40,23 @@
     --height: 4rem;
     --margin: 2rem;
     --radius: 0.5rem;
+
+    /* Type roles (root is 62.5%, so 1rem = 10px) */
+    --text-meta: 1.1rem;
+    --text-label: 1.3rem;
+    --text-body: 1.7rem;
+    --text-lead: 2.1rem;
+    --text-subheading: 2.6rem;
+    --text-opening: 3rem;
+    --text-page-title: clamp(3.2rem, 5vw, 4.2rem);
+    --text-entry: clamp(2.4rem, 4vw, 3.2rem);
+
+    /* Spacing roles */
+    --space-xs: 0.4rem;
+    --space-sm: 0.8rem;
+    --space-md: 1.6rem;
+    --space-lg: 3.2rem;
+    --space-xl: 6.4rem;
 
 }
 
@@ -63,5 +80,5 @@
 :lang(zh-TW),
 :lang(zh-HK),
 :lang(zh-Hant) {
-		font-family: 'EB Garamond', 'Source Han Sans TC', 'Noto Serif TC', 'PingFang TC', 'Microsoft JhengHei', serif;
+		font-family: var(--font-serif);
 }
