@@ -20,5 +20,5 @@ I work on practical cryptography at Academia Sinica. My current interests are po
 
 ## Talks and community
 
-- Presented **Lean Ethereum** at Taipei Ethereum Meetup, October 2025. [Watch the talk](https://www.youtube.com/watch?v=yoDrFdLtyHM&feature=youtu.be).
+- Presented **Lean Ethereum** at Taipei Ethereum Meetup, Oct. 2025. [Watch the talk](https://www.youtube.com/watch?v=yoDrFdLtyHM&feature=youtu.be).
 - Contributor to ETHTaipei and ZKTaipei since 2024.
