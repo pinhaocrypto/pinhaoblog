@@ -33,33 +33,21 @@ const kindLabels = {
   question: 'Question',
   memory: 'Memory',
 };
-const groupByYear = (posts: CollectionEntry<'pensieve'>[]) => {
-  const grouped = new Map<string | number, CollectionEntry<'pensieve'>[]>();
-  posts.forEach((post) => {
-    const date = post.data.date ? new Date(post.data.date) : null;
-    const year = date && !Number.isNaN(date.getFullYear()) ? date.getFullYear() : 'Undated';
-    if (!grouped.has(year)) grouped.set(year, []);
-    grouped.get(year)?.push(post);
-  });
-
-  return Array.from(grouped.entries())
-    .sort((a, b) => (a[0] === 'Undated' ? 1 : b[0] === 'Undated' ? -1 : Number(b[0]) - Number(a[0])))
-    .map(([year, posts]) => ({
-      year,
-      posts: posts.sort((a, b) => {
-        const da = a.data.date ? new Date(a.data.date).getTime() : 0;
-        const db = b.data.date ? new Date(b.data.date).getTime() : 0;
-        return db - da;
-      }),
-    }));
-};
-
-const groupedPosts = groupByYear(items as CollectionEntry<'pensieve'>[]);
+const isMainPensieve = entry?.data.templateKey === 'pensieve-page' && !backHref;
+const featuredPost = isMainPensieve ? items[0] : undefined;
+const featuredRendered = featuredPost ? await featuredPost.render() : null;
+const FeaturedContent = featuredRendered?.Content;
+const indexItems = featuredPost ? items.slice(1) : items;
+const formatDate = (date: Date) => date.toLocaleDateString('zh-TW', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+});
 ---
 
 <Layout title={title} description={description}>
-  <header class="blog-head page-marker">
-    <h1>{title}</h1>
+  <header class:list={['blog-head', { 'blog-head--main': isMainPensieve }]}>
+    <h1 class:list={{ 'visually-hidden': isMainPensieve }}>{title}</h1>
     {description && <p class="blog-desc">{description}</p>}
     {backHref && backLabel && <a class="blog-back" href={backHref}>← {backLabel}</a>}
   </header>
@@ -72,195 +60,364 @@ const groupedPosts = groupByYear(items as CollectionEntry<'pensieve'>[]);
     </article>
   )}
 
-  <section class="blog-index" aria-label="Pensieve entries">
-    {groupedPosts.length === 0 ? (
-      <p class="blog-empty">這裡還沒有想法。先留一點空白，等下一個念頭出現。</p>
-    ) : groupedPosts.map(({ year, posts }) => (
-      <div class="blog-year">
-        <h2>{year}</h2>
-        <ol>
-          {posts.map((post) => (
-            <li>
-              <a class="entry-link" href={`/${baseSlug}/${post.slug}`}>
-                <span>{post.data.title}</span>
-                {post.data.date && (
-                  <time datetime={post.data.date.toISOString()}>
-                    {post.data.date.toLocaleDateString('zh-TW', {
-                      year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
-                    })}
-                  </time>
-                )}
-              </a>
-              <div class="thought-meta" aria-label="內容資訊">
-                <span class="thought-kind">{kindLabels[post.data.kind]}</span>
-                {post.data.updated && (
-                  <span class="thought-updated">
-                    Updated <time datetime={post.data.updated.toISOString()}>{post.data.updated.toLocaleDateString('zh-TW')}</time>
-                  </span>
-                )}
-                {post.data.topics.map((topic) => (
-                  <a class="thought-topic" href={`/pensieve/topic/${topicToSlug(topic)}`}>#{topic}</a>
-                ))}
-              </div>
-              {post.data.description && <p>{post.data.description}</p>}
-            </li>
-          ))}
-        </ol>
+  {featuredPost && FeaturedContent && (
+    <article class="featured-entry">
+      <header>
+        <h2>
+          <a href={`/${baseSlug}/${featuredPost.slug}`}>{featuredPost.data.title}</a>
+        </h2>
+        {featuredPost.data.description && (
+          <p class="featured-description">{featuredPost.data.description}</p>
+        )}
+      </header>
+
+      {featuredPost.data.thumbnail && (
+        <img
+          class="featured-image"
+          src={featuredPost.data.thumbnail}
+          alt={featuredPost.data.title}
+          loading="lazy"
+          decoding="async"
+        />
+      )}
+
+      <div class="featured-body">
+        <FeaturedContent />
       </div>
-    ))}
+
+      <footer class="featured-meta" aria-label="內容資訊">
+        {featuredPost.data.date && (
+          <time datetime={featuredPost.data.date.toISOString()}>
+            {formatDate(featuredPost.data.date)}
+          </time>
+        )}
+        <span>{kindLabels[featuredPost.data.kind]}</span>
+        {featuredPost.data.updated && (
+          <span>
+            Updated <time datetime={featuredPost.data.updated.toISOString()}>{formatDate(featuredPost.data.updated)}</time>
+          </span>
+        )}
+        {featuredPost.data.topics.map((topic) => (
+          <a href={`/pensieve/topic/${topicToSlug(topic)}`}>#{topic}</a>
+        ))}
+      </footer>
+    </article>
+  )}
+
+  <section class="blog-index" aria-label="Pensieve entries">
+    {featuredPost && indexItems.length > 0 && <h2 class="index-title">Earlier</h2>}
+    {!featuredPost && <h2 class="visually-hidden">Entries</h2>}
+
+    {indexItems.length === 0 && !featuredPost ? (
+      <p class="blog-empty">這裡還沒有想法。先留一點空白，等下一個念頭出現。</p>
+    ) : indexItems.length > 0 && (
+      <ol class="entry-list">
+        {indexItems.map((post) => (
+          <li>
+            <div class="entry-heading">
+              <a class="entry-link" href={`/${baseSlug}/${post.slug}`}>{post.data.title}</a>
+              {post.data.date && (
+                <time datetime={post.data.date.toISOString()}>
+                  {formatDate(post.data.date)}
+                </time>
+              )}
+            </div>
+            {post.data.description && <p>{post.data.description}</p>}
+            <div class="thought-meta" aria-label="內容資訊">
+              <span>{kindLabels[post.data.kind]}</span>
+              {post.data.updated && (
+                <span>
+                  Updated <time datetime={post.data.updated.toISOString()}>{formatDate(post.data.updated)}</time>
+                </span>
+              )}
+              {post.data.topics.map((topic) => (
+                <a href={`/pensieve/topic/${topicToSlug(topic)}`}>#{topic}</a>
+              ))}
+            </div>
+          </li>
+        ))}
+      </ol>
+    )}
   </section>
 </Layout>
 
 <style>
   .blog-head {
-    max-width: 720px;
-    margin: 0 auto var(--space-lg);
+    max-width: 680px;
+    margin: 0 auto 6rem;
     padding: 0;
     text-align: left;
   }
 
+  .blog-head h1 {
+    margin: 0 0 1rem;
+    font-family: var(--font-reading);
+    font-size: 2rem;
+    font-weight: 650;
+    line-height: 1.3;
+  }
+
+  .blog-head--main {
+    margin-bottom: 7rem;
+  }
+
   .blog-desc {
-    flex-basis: 100%;
-    max-width: 60ch;
-    margin: var(--space-sm) 0 0;
-    font-family: var(--font-serif);
-    font-size: var(--text-lead);
-    line-height: 1.45;
+    max-width: 58ch;
+    margin: 0;
+    font-family: var(--font-reading);
+    font-size: 1.55rem;
+    line-height: 1.65;
     color: var(--color-text-subtle);
     text-wrap: pretty;
   }
 
   .blog-back {
-    flex-basis: 100%;
-    width: fit-content;
-    margin-top: var(--space-md);
-    font-family: var(--font-sans-serif);
-    font-size: var(--text-label);
+    display: inline-block;
+    margin-top: 1.6rem;
+    color: var(--color-text-subtle);
+    font-family: var(--font-reading);
+    font-size: 1.3rem;
   }
 
   .blog-intro {
-    max-width: 760px;
-    margin: 0 auto var(--space-xl);
+    max-width: 680px;
+    margin: 0 auto 7rem;
     padding: 0;
   }
 
-  .blog-index {
-    max-width: 760px;
-    margin: var(--space-xl) auto;
-    padding: 0;
+  .featured-entry {
+    max-width: 680px;
+    margin: 0 auto;
   }
 
-  .blog-year {
-    display: grid;
-    grid-template-columns: 6.4rem minmax(0, 1fr);
-    gap: var(--space-lg);
-    padding: var(--space-lg) 0;
+  .featured-entry > header {
+    margin-bottom: 4rem;
+    text-align: center;
+  }
+
+  .featured-entry h2 {
+    margin: 0;
+    font-family: var(--font-reading);
+    font-size: clamp(2rem, 3vw, 2.2rem);
+    font-weight: 650;
+    line-height: 1.3;
+    text-wrap: balance;
+  }
+
+  .featured-entry h2 a {
+    color: var(--color-base);
+    text-decoration: none;
+  }
+
+  .featured-entry h2 a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  .featured-description {
+    max-width: 58ch;
+    margin: 1rem auto 0;
+    color: var(--color-text-subtle);
+    font-size: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .featured-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 0 4rem;
+    border-radius: var(--radius);
+  }
+
+  .featured-body {
+    font-family: var(--font-reading);
+    font-size: 1.65rem;
+    line-height: 1.72;
+  }
+
+  .featured-body :global(p),
+  .featured-body :global(blockquote),
+  .featured-body :global(ol),
+  .featured-body :global(ul) {
+    text-wrap: pretty;
+  }
+
+  .featured-body :global(a) {
+    color: var(--color-base);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 25%, transparent);
+    text-underline-offset: 0.2em;
+  }
+
+  .featured-body :global(a:hover) {
+    text-decoration-color: currentColor;
+  }
+
+  .featured-body :global(h2) {
+    margin: 5.6rem 0 1.6rem;
+    font-size: 2rem;
+    font-weight: 650;
+    line-height: 1.35;
+  }
+
+  .featured-body :global(h3) {
+    margin: 3.6rem 0 1.2rem;
+    font-size: 1.75rem;
+    font-weight: 650;
+    line-height: 1.4;
+  }
+
+  .featured-body :global(li) {
+    line-height: 1.72;
+  }
+
+  .featured-body :global(img) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 3rem auto;
+  }
+
+  .featured-body :global(hr) {
+    margin: 5rem 0;
+    border: 0;
     border-top: 1px solid var(--color-border);
   }
 
-  .blog-year h2 {
-    margin: 0;
-    font-family: var(--font-sans-serif);
-    font-size: var(--text-label);
-    font-weight: 500;
-    letter-spacing: 0.1em;
+  .featured-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.2rem;
+    margin-top: 4rem;
+    color: var(--color-text-subtle);
+    font-family: var(--font-reading);
+    font-size: 1.15rem;
+    line-height: 1.5;
     font-variant-numeric: tabular-nums;
   }
 
-  .blog-year ol {
+  .featured-meta a {
+    color: inherit;
+    text-underline-offset: 0.2em;
+  }
+
+  .blog-index {
+    max-width: 680px;
+    margin: 10rem auto 0;
+    padding: 0;
+  }
+
+  .index-title {
+    margin: 0 0 4rem;
+    font-family: var(--font-reading);
+    font-size: 1.5rem;
+    font-weight: 650;
+    line-height: 1.4;
+  }
+
+  .entry-list {
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .blog-year li + li {
-    margin-top: var(--space-lg);
+  .entry-list li + li {
+    margin-top: 5rem;
   }
 
-  .entry-link {
+  .entry-heading {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    gap: var(--space-lg);
-    min-height: 4.4rem;
-    color: var(--color-base);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.2em;
+    gap: 2rem;
   }
 
-  .entry-link > span {
-    min-width: 0;
-    overflow-wrap: anywhere;
-    font-family: var(--font-serif);
-    font-size: var(--text-entry);
-    font-weight: 400;
-    line-height: 1.25;
+  .entry-link {
+    color: var(--color-base);
+    font-family: var(--font-reading);
+    font-size: 1.85rem;
+    font-weight: 600;
+    line-height: 1.35;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
     text-wrap: pretty;
   }
 
-  .blog-year time,
-  .blog-year p {
+  .entry-heading > time {
+    flex: none;
     color: var(--color-text-subtle);
+    font-family: var(--font-reading);
+    font-size: 1.15rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .entry-list p {
+    max-width: 62ch;
+    margin: 0.8rem 0 0;
+    color: var(--color-text-subtle);
+    font-size: 1.5rem;
+    line-height: 1.6;
+    text-wrap: pretty;
   }
 
   .thought-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-sm) var(--space-md);
-    margin-top: var(--space-sm);
+    gap: 0.5rem 1.2rem;
+    margin-top: 1rem;
     color: var(--color-text-subtle);
-    font-family: var(--font-sans-serif);
-    font-size: var(--text-meta);
-    line-height: 1.3;
-    letter-spacing: 0.04em;
-  }
-
-  .thought-kind,
-  .thought-updated {
-    text-transform: uppercase;
-  }
-
-  .thought-topic {
-    color: inherit;
-    text-transform: none;
-    text-underline-offset: 0.2em;
-  }
-
-  .blog-year time {
-    flex: none;
-    font-family: var(--font-sans-serif);
-    font-size: var(--text-meta);
+    font-family: var(--font-reading);
+    font-size: 1.1rem;
+    line-height: 1.45;
     font-variant-numeric: tabular-nums;
   }
 
-  .blog-year p {
-    max-width: 65ch;
-    margin: var(--space-sm) 0 0;
-    font-family: var(--font-serif);
-    font-size: var(--text-body);
-    line-height: 1.65;
-    text-wrap: pretty;
+  .thought-meta a {
+    color: inherit;
+    text-underline-offset: 0.2em;
   }
 
   .blog-empty {
     margin: 0;
-    padding: var(--space-lg) 0 var(--space-xl);
     color: var(--color-text-subtle);
-    font-size: var(--text-body);
+    font-size: 1.5rem;
   }
 
-  @media (max-width: 720px) {
-    .blog-year {
-      grid-template-columns: 1fr;
-      gap: var(--space-md);
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 520px) {
+    .blog-head--main {
+      margin-bottom: 6rem;
     }
 
-    .entry-link {
+    .featured-entry > header {
+      margin-bottom: 3.6rem;
+    }
+
+    .featured-body {
+      font-size: 1.6rem;
+    }
+
+    .blog-index {
+      margin-top: 8rem;
+    }
+
+    .entry-heading {
       align-items: flex-start;
       flex-direction: column;
-      gap: var(--space-sm);
+      gap: 0.5rem;
     }
   }
 </style>

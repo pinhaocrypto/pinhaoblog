@@ -103,9 +103,9 @@ production stylesheet in assets/built/screen.css using gulp dev
 /* ---------------------------------------------------------- */
 
 .post-content {
-  max-width: 720px;
+  max-width: 680px;
   margin: 0 auto;
-  padding: 3vw 0;
+  padding: 0;
 }
 
 .post-content-header {
@@ -115,9 +115,14 @@ production stylesheet in assets/built/screen.css using gulp dev
 }
 
 .post-content-title {
-  margin: 0 0 3vw;
+  margin: 0 0 1.2rem;
   color: var(--color-base);
+  font-family: var(--font-reading);
+  font-size: clamp(2rem, 3vw, 2.2rem);
+  font-weight: 650;
+  line-height: 1.3;
   text-align: center;
+  text-wrap: balance;
 }
 
 .page-marker {
@@ -125,19 +130,18 @@ production stylesheet in assets/built/screen.css using gulp dev
   flex-wrap: wrap;
   align-items: baseline;
   gap: 1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 4.8rem;
   color: var(--color-text-subtle);
-  font-family: var(--font-sans-serif);
+  font-family: var(--font-reading);
 }
 
 .page-marker h1 {
   margin: 0;
   color: inherit;
   font-family: inherit;
-  font-size: 1.45rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 650;
+  letter-spacing: 0;
 }
 
 html[data-theme='dark'] .page-marker h1 {
@@ -145,20 +149,20 @@ html[data-theme='dark'] .page-marker h1 {
 }
 
 .post-content-date {
-  margin-top: -2vw;
-  margin-bottom: 3vw;
+  margin: 0 0 4rem;
   color: var(--color-text-subtle);
-  font-family: var(--font-sans-serif);
-  font-size: 1.3rem;
+  font-family: var(--font-reading);
+  font-size: 1.2rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .post-content-excerpt {
-  margin: -2vw 0 3vw;
-  font-size: 2.2rem;
-  line-height: 1.6em;
-  color: var(--color-base);
+  max-width: 58ch;
+  margin: -2rem auto 4rem;
+  font-size: 1.55rem;
+  line-height: 1.65;
+  color: var(--color-text-subtle);
   text-align: center;
-  opacity: 0.5;
 }
 @media (max-width: 500px) {
   .post-content-excerpt {
@@ -167,59 +171,58 @@ html[data-theme='dark'] .page-marker h1 {
 }
 
 .post-content-image {
-  margin: 4vw 0;
+  margin: 5rem auto;
   position: relative;
-  width: 75vw;
-  min-width: 100%;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  transform: translateX(calc(50vw - 50%));
+  width: min(92vw, 960px);
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .post-content-body {
-  font-size: 1.9rem;
-  line-height: 1.65em;
+  font-family: var(--font-reading);
+  font-size: 1.65rem;
+  line-height: 1.72;
 }
 
 .post-content-body.bio-content {
-  font-size: 1.8rem;
-  line-height: 1.7;
+  font-size: 1.65rem;
+  line-height: 1.72;
 }
 
 .post-content-body.bio-content h2 {
-  margin: 4.8rem 0 1.6rem;
-  font-size: 3.2rem;
-  font-weight: 400;
-  line-height: 1.25;
+  margin: 5.6rem 0 1.6rem;
+  font-size: 2rem;
+  font-weight: 650;
+  line-height: 1.35;
   text-wrap: balance;
 }
 
 .post-content-body.bio-content h3 {
-  margin: 3.2rem 0 1.2rem;
-  font-size: 2.4rem;
-  font-weight: 500;
-  line-height: 1.3;
+  margin: 3.6rem 0 1.2rem;
+  font-size: 1.75rem;
+  font-weight: 650;
+  line-height: 1.4;
   text-wrap: balance;
 }
 
 @media (max-width: 500px) {
   .post-content-body.bio-content {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
   }
 
   .post-content-body.bio-content h2 {
-    margin-top: 4rem;
-    font-size: 2.6rem;
+    margin-top: 4.8rem;
+    font-size: 1.9rem;
   }
 
   .post-content-body.bio-content h3 {
-    margin-top: 2.4rem;
-    font-size: 2.1rem;
+    margin-top: 3.2rem;
+    font-size: 1.7rem;
   }
 }
 @media (max-width: 500px) {
   .post-content-body {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
   }
 }
 
@@ -230,6 +233,29 @@ html[data-theme='dark'] .page-marker h1 {
 .post-content-body h5,
 .post-content-body h6 {
   color: var(--color-base);
+  font-family: var(--font-reading);
+  font-weight: 650;
+  text-wrap: balance;
+}
+
+.post-content-body h2 {
+  margin: 5.6rem 0 1.6rem;
+  font-size: 2rem;
+  line-height: 1.35;
+}
+
+.post-content-body h3 {
+  margin: 3.6rem 0 1.2rem;
+  font-size: 1.75rem;
+  line-height: 1.4;
+}
+
+.post-content-body h4,
+.post-content-body h5,
+.post-content-body h6 {
+  margin: 3rem 0 1rem;
+  font-size: 1.6rem;
+  line-height: 1.45;
 }
 
 html[data-theme='dark'] .post-content-body h1,
@@ -252,8 +278,8 @@ html[data-theme='dark'] .post-content-body h6 a {
 
 .post-content-body li {
   word-break: break-word;
-  font-size: 1.1em;
-  line-height: 1.7em;
+  font-size: 1em;
+  line-height: 1.72;
 }
 
 .post-content-body li p {
@@ -278,7 +304,7 @@ html[data-theme='dark'] .post-content-body h6 a {
 .post-content-body blockquote {
   margin: 0 0 1.5em;
   padding: 0 1.5em;
-  border-left: var(--color-surface-border) 3px solid;
+  border-left: var(--color-surface-border) 1px solid;
 }
 
 .post-content-body blockquote p {
@@ -335,21 +361,12 @@ html[data-theme='dark'] .post-content-body h6 a {
 }
 
 .post-content-body hr {
-  margin: 4vw 0;
+  margin: 5rem 0;
+  border-top: 1px solid var(--color-border);
 }
 
 .post-content-body hr:after {
-  content: "";
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  display: block;
-  margin-left: -10px;
-  width: 0px;
-  height: 30px;
-  background: var(--color-surface);
-  box-shadow: 0 0 0 1px var(--color-surface-border);
-  transform: rotate(45deg);
+  content: none;
 }
 
 .footnotes-sep {

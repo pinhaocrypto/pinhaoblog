@@ -53,7 +53,7 @@ const navItems = [
 			<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 			<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
 			<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
-			<meta name="theme-color" content="#ffffff" />
+			<meta name="theme-color" content="#fffefa" />
 			<meta name="generator" content={Astro.generator} />
 			<meta property="og:site_name" content={SITE_NAME} />
 			<meta property="og:type" content={type} />
@@ -74,14 +74,14 @@ const navItems = [
         <script is:inline>
             // Theme init
             const storedTheme = localStorage.getItem('theme');
-            const theme = storedTheme ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            const theme = storedTheme ?? 'light';
             if (theme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
             } else {
                 document.documentElement.removeAttribute('data-theme');
             }
             document.documentElement.style.colorScheme = theme;
-            document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#121212' : '#ffffff');
+            document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#121212' : '#fffefa');
         </script>
 	</head>
 	<body class="site-wrapper">
@@ -184,7 +184,7 @@ const navItems = [
                        }
                        localStorage.setItem('theme', newTheme);
                        document.documentElement.style.colorScheme = newTheme;
-                       document.querySelector('meta[name="theme-color"]')?.setAttribute('content', newTheme === 'dark' ? '#121212' : '#ffffff');
+                       document.querySelector('meta[name="theme-color"]')?.setAttribute('content', newTheme === 'dark' ? '#121212' : '#fffefa');
                        updateIcon();
                    };
                 }
@@ -199,16 +199,16 @@ const navItems = [
             // Re-apply theme on swap to prevent flash?
             // The is:inline script in head handles the initial check on reload.
             // astro:after-swap handles verifying state after client-side nav.
-             document.addEventListener('astro:after-swap', () => {
+            document.addEventListener('astro:after-swap', () => {
                 const theme = localStorage.getItem('theme');
-                if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                if (theme === 'dark') {
                     document.documentElement.setAttribute('data-theme', 'dark');
                     document.documentElement.style.colorScheme = 'dark';
                     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#121212');
                 } else {
                      document.documentElement.removeAttribute('data-theme');
                      document.documentElement.style.colorScheme = 'light';
-                     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#ffffff');
+                     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#fffefa');
                 }
              });
         </script>
@@ -216,11 +216,10 @@ const navItems = [
 <style is:global>
     /* Global Styles */
     body {
-        font-family: var(--font-serif);
+        font-family: var(--font-reading);
         background: var(--color-bg);
-        color: var(--color-base); /* Ensure text respects theme */
-        transition: background 0.3s ease-out, color 0.3s ease-out;
-        transition-delay: 0.25s;
+        color: var(--color-base);
+        transition: background 0.2s ease-out, color 0.2s ease-out;
         margin: 0;
     }
 
@@ -283,21 +282,23 @@ const navItems = [
 
     /* Layout */
     .site-main {
-        padding-top: 3rem;
+        padding-top: clamp(5rem, 7vw, 9rem);
         padding-bottom: 3rem;
     }
 
     .site-wrapper {
-        padding: 3vw;
+        box-sizing: border-box;
+        width: 100%;
+        padding: clamp(2rem, 3.5vw, 5rem) clamp(2rem, 5.8vw, 8.5rem);
         min-height: 100vh;
-        max-width: 1920px;
+        max-width: 1600px;
         margin-right: auto;
         margin-left: auto;
     }
 
     @media (max-width: 850px) {
         .site-wrapper {
-            padding: 6vw;
+            padding: 2rem;
         }
     }
 
@@ -341,13 +342,13 @@ const navItems = [
 
     /* Footer */
     .site-foot {
-        font-family: var(--font-sans-serif);
-        font-weight: 300;
-        margin: 3vw 0 1vw;
+        font-family: var(--font-reading);
+        font-weight: 400;
+        margin: 8rem 0 1rem;
         text-align: center;
         color: var(--color-base);
-        opacity: 0.6;
-        font-size: var(--text-label);
+        opacity: 0.55;
+        font-size: 1.2rem;
         line-height: 1.6;
     }
 
@@ -367,29 +368,30 @@ const navItems = [
     .site-head {
         position: relative;
         z-index: 300;
-        margin-top: -10px;
-        font-size: var(--text-label);
+        font-size: 1.4rem;
     }
 
     .site-head-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 0 1rem;
     }
 
     .site-head-left {
         position: relative;
         z-index: 100;
+        order: 2;
         display: flex;
         align-items: center;
-        margin-right: 10px;
+        margin-right: 0;
+        margin-left: auto;
         white-space: nowrap;
     }
 
     .nav {
         display: flex;
-        margin: 0 0 0 -12px;
+        gap: 2.2rem;
+        margin: 0;
         padding: 0;
         list-style: none;
     }
@@ -404,15 +406,13 @@ const navItems = [
     .site-head-right a {
         display: block;
         margin: 0;
-        padding: 10px 12px;
+        padding: 1rem 0;
         color: var(--color-base);
-        font-family: var(--font-sans-serif);
+        font-family: var(--font-reading);
         font-weight: 400;
-        font-size: var(--text-body);
-        text-transform: lowercase;
-        font-variant: small-caps;
-        letter-spacing: 1px;
-        opacity: 0.6;
+        font-size: 1.4rem;
+        letter-spacing: 0;
+        opacity: 0.72;
     }
 
     .nav-current a,
@@ -422,23 +422,23 @@ const navItems = [
     }
 
     .site-head-center {
-        position: absolute;
+        position: static;
+        order: 1;
         display: flex;
-        justify-content: center;
-        width: 100%;
+        justify-content: flex-start;
     }
 
     .site-head-logo {
-        font-family: var(--font-sans-serif);
+        font-family: var(--font-reading);
         flex-shrink: 0;
         display: block;
-        padding: 10px;
+        padding: 1rem 0;
         color: var(--color-base);
-        font-size: var(--text-opening);
+        font-size: 1.8rem;
         line-height: 1em;
-        font-weight: 500;
+        font-weight: 650;
         text-transform: uppercase;
-        letter-spacing: 3px;
+        letter-spacing: 0.12em;
     }
 
     .site-head-logo:hover {
@@ -455,9 +455,11 @@ const navItems = [
     .site-head-right {
         position: relative;
         z-index: 100;
+        order: 3;
         flex-shrink: 0;
         display: flex;
         align-items: center;
+        margin-left: 1.4rem;
     }
 
     .social-links {
@@ -482,6 +484,9 @@ const navItems = [
     @media (max-width: 850px) {
         .site-head {
             padding: 0;
+        }
+        .site-main {
+            padding-top: 5rem;
         }
         .nav-burger {
             display: block;
@@ -549,8 +554,8 @@ const navItems = [
         }
 
         .site-head-logo {
-            font-size: var(--text-lead);
-            letter-spacing: 1px;
+            font-size: 1.7rem;
+            letter-spacing: 0.1em;
             text-align: center;
             max-width: 80%;
             line-height: 1.2em;

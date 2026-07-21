@@ -4,7 +4,7 @@ name: The Quiet Pensieve
 description: A restrained editorial archive for thoughts at different stages of maturity.
 colors:
   ink: "#131313"
-  paper: "#FFFFFF"
+  paper: "#FFFEFA"
   muted-ink: "#5A5A5A"
   rule: "#DDDDDD"
   quiet-surface: "#F5F5F5"
@@ -15,42 +15,42 @@ colors:
   focus: "#2A7FB8"
 typography:
   opening:
-    fontFamily: EB Garamond
-    fontSize: 30px
-    fontWeight: 400
-    lineHeight: 1.2
+    fontFamily: Avenir Next
+    fontSize: 23px
+    fontWeight: 650
+    lineHeight: 1.3
   body:
-    fontFamily: EB Garamond
-    fontSize: 17px
+    fontFamily: Avenir Next
+    fontSize: 16.5px
     fontWeight: 400
-    lineHeight: 1.65
+    lineHeight: 1.72
   lead:
-    fontFamily: EB Garamond
-    fontSize: 21px
-    fontWeight: 400
-    lineHeight: 1.45
+    fontFamily: Avenir Next
+    fontSize: 18.5px
+    fontWeight: 600
+    lineHeight: 1.35
   entry-title:
-    fontFamily: EB Garamond
-    fontSize: 32px
-    fontWeight: 400
-    lineHeight: 1.25
+    fontFamily: Avenir Next
+    fontSize: 22px
+    fontWeight: 650
+    lineHeight: 1.3
   subheading:
-    fontFamily: EB Garamond
-    fontSize: 26px
-    fontWeight: 400
-    lineHeight: 1.3
+    fontFamily: Avenir Next
+    fontSize: 20px
+    fontWeight: 650
+    lineHeight: 1.35
   label:
-    fontFamily: League Spartan
-    fontSize: 13px
-    fontWeight: 500
-    lineHeight: 1.2
-    letterSpacing: 0.1em
+    fontFamily: Avenir Next
+    fontSize: 15px
+    fontWeight: 650
+    lineHeight: 1.4
+    letterSpacing: 0
   metadata:
-    fontFamily: League Spartan
-    fontSize: 11px
+    fontFamily: Avenir Next
+    fontSize: 11.5px
     fontWeight: 400
-    lineHeight: 1.3
-    letterSpacing: 0.04em
+    lineHeight: 1.5
+    letterSpacing: 0
 spacing:
   xs: 4px
   sm: 8px
@@ -67,9 +67,9 @@ rounded:
 
 ## Overview
 
-The Creative North Star is **The Quiet Pensieve**: a personal editorial archive where ideas appear at different depths and levels of maturity. The interface should resemble a well-kept but actively used notebook, not a finished publication or a branded campaign.
+The Creative North Star is **The Quiet Pensieve**: a personal reading archive where ideas appear at different depths and levels of maturity. The interface should resemble a well-kept but actively used notebook, not a finished publication or a branded campaign.
 
-Reading comes first. Use a narrow content column around 720–760px, generous vertical intervals, simple rules, and open space. Hierarchy should come from typography, rhythm, chronology, and relationships between entries rather than containers or promotional sections.
+Reading comes first. Use a narrow content column around 680px, generous vertical intervals, very few rules, and open space. Hierarchy should come from weight, rhythm, chronology, and relationships between entries rather than containers, large type, or promotional sections.
 
 The site is a brand surface, but expression must remain quiet. Distinctiveness comes from the Pensieve vocabulary, bilingual voice, editorial type, personal images, dates, visible revisions, and recurring questions. Avoid making every page visually dramatic.
 
@@ -80,7 +80,7 @@ Motion is sparse and functional: 150–250ms ease-out transitions for navigation
 The palette is ink on paper in light mode and soft ink on near-black paper in dark mode.
 
 - **Ink (`#131313`):** primary text and headings. It is softer than pure black.
-- **Paper (`#FFFFFF`):** the light reading surface.
+- **Paper (`#FFFEFA`):** an almost-white reading surface with only enough warmth to soften the page.
 - **Muted Ink (`#5A5A5A`):** dates, descriptions, and secondary orientation.
 - **Rule (`#DDDDDD`):** quiet separators between accumulated material.
 - **Quiet Surface (`#F5F5F5`):** code, tables, and rare grouped utility areas, not generic cards.
@@ -89,17 +89,19 @@ The palette is ink on paper in light mode and soft ink on near-black paper in da
 
 Keep the site predominantly neutral. Personal images may introduce color. Do not create a rainbow of category colors for Note, Essay, Question, and Memory; their differences are semantic, not decorative.
 
+Light mode is the default for a first visit. Dark mode is an explicit reader preference and remains selected once chosen; do not infer it from the operating-system theme.
+
 ## Typography
 
-Typography carries the identity.
+Typography should disappear into the reading experience.
 
-- **Narrative and entry titles:** EB Garamond with Traditional Chinese serif fallbacks. Use regular weight, generous leading, and readable 45–75 character line lengths.
-- **Navigation, section labels, and metadata:** League Spartan with system sans-serif fallbacks.
-- **Chinese text:** allow the browser to fall through to Noto Serif TC, PingFang TC, or Microsoft JhengHei as currently configured. Do not force all bilingual content into a single generic sans-serif.
+- **Primary reading face:** Avenir Next with Helvetica Neue, Noto Sans TC, PingFang TC, Microsoft JhengHei, and system sans-serif fallbacks. Using one family across navigation and prose is intentional: the hierarchy comes from weight and spacing, not a decorative font pairing.
+- **EB Garamond:** retained as an available accent for a future piece that genuinely benefits from a literary voice, but it is not the default interface or prose face.
+- **Chinese text:** use the sans-serif Traditional Chinese fallback stack so bilingual paragraphs keep the same visual texture.
 - **Page identity:** Bio, Work, and Pensieve use small orientation markers rather than display-sized titles.
-- **Article titles:** may be visually prominent, but should remain editorial rather than promotional.
+- **Article titles:** stay close to body scale—roughly 20–22px—and use weight rather than size for emphasis.
 
-Use sentence case for prose. Uppercase is reserved for short navigational labels and metadata. Never use oversized italic-serif hero copy, extreme tracking, or more than the existing two font families.
+Use sentence case for prose and section labels. Uppercase is reserved for the MNIPH wordmark. Never use oversized hero copy, extreme tracking, or ornamental type merely to signal that the site contains writing.
 
 ## Elevation
 
@@ -111,9 +113,9 @@ Do not use box shadows for ordinary content. Hover and focus states may change o
 
 - **Site navigation:** a quiet horizontal list around the MNIPH wordmark. On mobile it becomes a keyboard-accessible disclosure menu. Pensieve replaces Blog as the canonical writing destination.
 - **Home opening:** a modest greeting and one explanatory sentence. Never expand it back into a professional slogan, résumé summary, or CTA row.
-- **Home sections:** recent writing, Now, and recurring questions are separated by thin rules and spacing rather than cards.
+- **Home sections:** recent writing, Now, and recurring questions are separated by generous spacing rather than cards or repeated rules.
 - **Page marker:** a small text label such as `Bio` or `Work`; it orients without competing with content or implying a required sequence.
-- **Pensieve index:** chronological groups with entry title, date, kind, topics, optional updated date, and description. Entry titles are the dominant element.
+- **Pensieve index:** the newest entry opens directly into its full text. Earlier entries return to a compact chronological index with title, date, kind, topics, optional updated date, and description.
 - **Thought metadata:** compact sans-serif labels. They should read like archival notation, not colorful badges.
 - **Article body:** a narrow long-form column with clear headings, comfortable lists, code treatment, and full-width images only when the material benefits.
 - **Links:** use visible underlines or another unambiguous text treatment. Keep hover changes restrained and preserve keyboard focus rings.
