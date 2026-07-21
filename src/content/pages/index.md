@@ -3,7 +3,6 @@ templateKey: index-page
 title: PIN HAO
 description: Pin Hao 的個人書寫空間，記錄技術、工作、學習、生活，以及還沒有答案的問題。
 heading: Hi, My Name Is Pin-Hao.
-subheading: 
 heroImageLight: /img/hangang_morning.webp
 heroImageDark: /img/hangang_night.webp
 heroImageAlt: Seoul Hangang skyline
